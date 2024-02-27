@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>610895815288-c2q0d464sunf1ign6vkupr2ll5kohq0s.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.610895815288-c2q0d464sunf1ign6vkupr2ll5kohq0s</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCcFliGJ9TwsF49NbFBnhN523wY6cffpAk</string>
+	<key>GCM_SENDER_ID</key>
+	<string>610895815288</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.ecubix.basf</string>
+	<key>PROJECT_ID</key>
+	<string>basf-hk-flutter</string>
+	<key>STORAGE_BUCKET</key>
+	<string>basf-hk-flutter.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:610895815288:ios:58abad1c2f6704d3</string>
+	<key>DATABASE_URL</key>
+	<string>https://basf-hk-flutter.firebaseio.com</string>
+</dict>
+</plist>

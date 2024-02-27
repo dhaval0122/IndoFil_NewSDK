@@ -1,0 +1,38 @@
+[
+  {
+    "fonts": [
+      {
+        "asset": "fonts/MaterialIcons-Regular.ttf"
+      }
+    ],
+    "family": "MaterialIcons"
+  },
+  {
+    "family": "helvetica",
+    "fonts": [
+      {
+        "asset": "fonts/helvetica_neue.ttf"
+      },
+      {
+        "asset": "fonts/helvetica_neue_bold.ttf"
+      },
+      {
+        "asset": "fonts/helvetica_neue_light.ttf"
+      },
+      {
+        "asset": "fonts/helvetica_neue_medium.ttf"
+      },
+      {
+        "asset": "fonts/helvetica_neue_thin.ttf"
+      }
+    ]
+  },
+  {
+    "family": "packages/cupertino_icons/CupertinoIcons",
+    "fonts": [
+      {
+        "asset": "packages/cupertino_icons/assets/CupertinoIcons.ttf"
+      }
+    ]
+  }
+]

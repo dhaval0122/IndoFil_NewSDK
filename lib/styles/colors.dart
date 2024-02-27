@@ -1,0 +1,14 @@
+const int colorPrimary = 0xFF3D516D;
+const int colorPrimaryDark = 0x80102841;
+const int colorAccent = 0xFFA6C0DA;
+const int colorAccentLight = 0xFF697c9a;
+const int colorPrimaryTrans = 0x1A65AC1E;
+const int colorPrimaryTrans20 = 0x3365AC1E;
+const int colorPrimaryTrans50 = 0x8065AC1E;
+const int transCameraBgColor = 0x99000000;
+const int tabbgColor = 0x99E7F1FF;
+const int tabSelectedbgColor = 0x99D3E5FF;
+const int progressColor = 0xFF96a6da;
+const int moreColor = 0xFF70829B;
+const int textColor = 0xFF004A96;
+const int textTwoColor = 0xFF212529;

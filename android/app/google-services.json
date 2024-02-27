@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "610895815288",
+    "firebase_url": "https://basf-hk-flutter.firebaseio.com",
+    "project_id": "basf-hk-flutter",
+    "storage_bucket": "basf-hk-flutter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:610895815288:android:58abad1c2f6704d3",
+        "android_client_info": {
+          "package_name": "com.ecubix.basf"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "610895815288-1j5j4t8qeijmlstvg6u9eg3c4ko7621j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCIP-x7PfBWSw3cEPA8xXW6quJz8dLuoYo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "610895815288-1j5j4t8qeijmlstvg6u9eg3c4ko7621j.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "610895815288-c2q0d464sunf1ign6vkupr2ll5kohq0s.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ecubix.basf"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

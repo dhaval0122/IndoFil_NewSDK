@@ -1,0 +1,164 @@
+{
+  "packages/cupertino_icons/assets/CupertinoIcons.ttf": [
+    "packages/cupertino_icons/assets/CupertinoIcons.ttf"
+  ],
+  "assets/basf_appicon.png": [
+    "assets/basf_appicon.png"
+  ],
+  "assets/black_delete_icon.png": [
+    "assets/black_delete_icon.png"
+  ],
+  "assets/congratulations_icon.png": [
+    "assets/congratulations_icon.png"
+  ],
+  "assets/congratulations_smiley_icon.png": [
+    "assets/congratulations_smiley_icon.png"
+  ],
+  "assets/damaged_icon.png": [
+    "assets/damaged_icon.png"
+  ],
+  "assets/dashboard_bg.png": [
+    "assets/dashboard_bg.png"
+  ],
+  "assets/dispatch_icon.png": [
+    "assets/dispatch_icon.png"
+  ],
+  "assets/dispatch_small_icon.png": [
+    "assets/dispatch_small_icon.png"
+  ],
+  "assets/download_icon.png": [
+    "assets/download_icon.png"
+  ],
+  "assets/drawer_logo.png": [
+    "assets/drawer_logo.png"
+  ],
+  "assets/dropdown_dark_arrow.png": [
+    "assets/dropdown_dark_arrow.png"
+  ],
+  "assets/edit_do_icon.png": [
+    "assets/edit_do_icon.png"
+  ],
+  "assets/email_icon.png": [
+    "assets/email_icon.png"
+  ],
+  "assets/footer_logo.png": [
+    "assets/footer_logo.png"
+  ],
+  "fonts/helvetica_neue.ttf": [
+    "fonts/helvetica_neue.ttf"
+  ],
+  "fonts/helvetica_neue_bold.ttf": [
+    "fonts/helvetica_neue_bold.ttf"
+  ],
+  "fonts/helvetica_neue_light.ttf": [
+    "fonts/helvetica_neue_light.ttf"
+  ],
+  "fonts/helvetica_neue_medium.ttf": [
+    "fonts/helvetica_neue_medium.ttf"
+  ],
+  "fonts/helvetica_neue_thin.ttf": [
+    "fonts/helvetica_neue_thin.ttf"
+  ],
+  "assets/ic_insight_white.png": [
+    "assets/ic_insight_white.png"
+  ],
+  "assets/ic_sales_summary_white.png": [
+    "assets/ic_sales_summary_white.png"
+  ],
+  "assets/ic_stat_name.png": [
+    "assets/ic_stat_name.png"
+  ],
+  "assets/info_icon.png": [
+    "assets/info_icon.png"
+  ],
+  "assets/inner_header_logo.png": [
+    "assets/inner_header_logo.png"
+  ],
+  "assets/know_your_box_icon.png": [
+    "assets/know_your_box_icon.png"
+  ],
+  "assets/login_top_shape.png": [
+    "assets/login_top_shape.png"
+  ],
+  "assets/logout_icon.png": [
+    "assets/logout_icon.png"
+  ],
+  "assets/male_avatar.png": [
+    "assets/male_avatar.png"
+  ],
+  "assets/msi_search_icon.png": [
+    "assets/msi_search_icon.png"
+  ],
+  "assets/nodata_icon.png": [
+    "assets/nodata_icon.png"
+  ],
+  "assets/notification_icon.png": [
+    "assets/notification_icon.png"
+  ],
+  "assets/password_icon.png": [
+    "assets/password_icon.png"
+  ],
+  "assets/promise_one.png": [
+    "assets/promise_one.png"
+  ],
+  "assets/qrcode_bg.png": [
+    "assets/qrcode_bg.png"
+  ],
+  "assets/qrcode_icon.png": [
+    "assets/qrcode_icon.png"
+  ],
+  "assets/receive_icon.png": [
+    "assets/receive_icon.png"
+  ],
+  "assets/setting_icon.png": [
+    "assets/setting_icon.png"
+  ],
+  "assets/ssn_vertical_line.png": [
+    "assets/ssn_vertical_line.png"
+  ],
+  "assets/star_theme.png": [
+    "assets/star_theme.png"
+  ],
+  "assets/star_yellow.png": [
+    "assets/star_yellow.png"
+  ],
+  "assets/stock_icon.png": [
+    "assets/stock_icon.png"
+  ],
+  "assets/stock_info_icon.png": [
+    "assets/stock_info_icon.png"
+  ],
+  "assets/stock_transfer.png": [
+    "assets/stock_transfer.png"
+  ],
+  "assets/stock_transfer_small_top.png": [
+    "assets/stock_transfer_small_top.png"
+  ],
+  "assets/sync_icon.png": [
+    "assets/sync_icon.png"
+  ],
+  "assets/timeline_1.png": [
+    "assets/timeline_1.png"
+  ],
+  "assets/timeline_2.png": [
+    "assets/timeline_2.png"
+  ],
+  "assets/timeline_3.png": [
+    "assets/timeline_3.png"
+  ],
+  "assets/timeline_4.png": [
+    "assets/timeline_4.png"
+  ],
+  "assets/timeline_circle_bg.png": [
+    "assets/timeline_circle_bg.png"
+  ],
+  "assets/timeline_top_rightarrow_normal.png": [
+    "assets/timeline_top_rightarrow_normal.png"
+  ],
+  "assets/user_icon.png": [
+    "assets/user_icon.png"
+  ],
+  "assets/woman_avatar.png": [
+    "assets/woman_avatar.png"
+  ]
+}
