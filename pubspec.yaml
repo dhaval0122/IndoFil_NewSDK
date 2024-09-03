@@ -44,8 +44,9 @@ dependencies:
   webview_flutter: ^3.0.4
   audioplayers: ^0.20.1
   pinput: ^2.2.16
-  in_app_update: ^4.0.1
-  ecp_sync_plugin: ^6.8.4
+#  in_app_update: ^4.0.1
+  ecp_sync_plugin: 6.8.4
+  lottie: ^2.3.2
 #  flutter_inappwebview: ^6.0.0-beta.18
 
 

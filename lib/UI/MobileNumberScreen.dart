@@ -132,9 +132,10 @@ class _MobileNumberScreenState extends State<MobileNumberScreen> {
                                   height: screenSize.height,
                                   decoration: BoxDecoration(
                                       color: Colors.white,
-                                      borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(25),
-                                          topRight: Radius.circular(20))),
+                                      // borderRadius: BorderRadius.only(
+                                      //     topLeft: Radius.circular(25),
+                                      //     topRight: Radius.circular(20))
+                                  ),
                                   child: Column(
                                     children: [
                                       Expanded(
@@ -149,7 +150,7 @@ class _MobileNumberScreenState extends State<MobileNumberScreen> {
                                                   left: 20, top: 20, right: 20),
                                               alignment: Alignment.center,
                                               child: Text(
-                                                'Welcome to ecubix Channel Performance Management',
+                                                'Welcome to ecubix',
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
                                                     fontSize: 20,

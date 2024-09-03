@@ -20,7 +20,7 @@ import 'package:flutter_basf_hk_app/styles/colors.dart';
 import 'package:flutter_basf_hk_app/webservices/Constant.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:in_app_update/in_app_update.dart';
+// import 'package:in_app_update/in_app_update.dart';
 import 'package:intl/intl.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -775,7 +775,7 @@ class Utils {
 
   static String getProjectTitle() {
     if(Constant.IS_DEMO_APP == 'Y') {
-      return 'ecubix QR';
+      return 'eAuthentica';
     }else {
       return 'Indofil QR';
     }
@@ -863,9 +863,8 @@ class Utils {
   }
   static checkForUpdatesFromPlayStore() async {
     // Get available update info
-    final updateInfo = await InAppUpdate.checkForUpdate();
+    /*final updateInfo = await InAppUpdate.checkForUpdate();
     print('updateInfo===$updateInfo');
-    // Check if there is an update available
     if (updateInfo.updateAvailability == UpdateAvailability.updateAvailable) {
       var result = await InAppUpdate.performImmediateUpdate();
       if (result == AppUpdateResult.userDeniedUpdate) {
@@ -874,6 +873,6 @@ class Utils {
     } else if (updateInfo.updateAvailability ==
         UpdateAvailability.updateNotAvailable) {
       Utils.showToastMessage('No Update available in play store');
-    }
+    }*/
   }
 }

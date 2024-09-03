@@ -131,9 +131,10 @@ class _WebViewScreenState extends State<WebViewScreen> {
                         child: Container(
                           decoration: BoxDecoration(
                               color: Colors.white,
-                              borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(25),
-                                  topRight: Radius.circular(25))),
+                              // borderRadius: BorderRadius.only(
+                              //     topLeft: Radius.circular(25),
+                              //     topRight: Radius.circular(25))
+                          ),
                           child: Container(
                             padding: EdgeInsets.only(
                                 top: 5, bottom: 5, left: 10, right: 10),

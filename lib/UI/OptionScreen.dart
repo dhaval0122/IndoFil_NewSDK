@@ -16,9 +16,11 @@ import 'package:flutter_basf_hk_app/localization/LocaleUtils.dart';
 import 'package:flutter_basf_hk_app/styles/colors.dart';
 import 'package:flutter_basf_hk_app/styles/dimens.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:lottie/lottie.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 
+import '../components/ButtonWidgets.dart';
 import '../webservices/Constant.dart';
 import 'ProductDetailScreen.dart';
 
@@ -50,7 +52,288 @@ class _OptionScreenState extends State<OptionScreen> {
 
     _batteryStateSubscription =
         _battery.onBatteryStateChanged.listen((Map state) async {
-      try {
+
+          try {
+            print('=======state=======${state.toString()}');
+            if (state['type'] == '777') {
+              var detailsData = state['Details'];
+              print('====detailsData.toString()====${detailsData.toString()}');
+              var code = detailsData.toString().split('::');
+              print('====F CODE==length===${code.length}');
+              if (code.isNotEmpty) {
+
+                if (code[0].toString() == 'PS') {
+                  print('====PS===${code[1].toString()}');
+                  // pData = '';
+                  // optionScreenBloc.progressEvent(true);
+                  // setState(() {
+                  //   _loading = true;
+                  // });
+                  optionScreenBloc.setBusy(true);
+                } else if (code[0].toString() == 'PD') {
+                  print('====PD===${code[1].toString()}');
+                  // optionScreenBloc.progressEvent(false);
+
+                } else if (code[0].toString() == 'PResult') {
+                  // optionScreenBloc.progressEvent(false);
+                  // setState(() {
+                  //   _loading = false;
+                  // });
+                  // setState(() {
+                  //   _loading = false;
+                  // });
+                  optionScreenBloc.setBusy(false);
+                  print('====PResult===${code[1].toString()}');
+
+                  if (code[1].toString().toUpperCase() == 'PASS') {
+                    isValid = 'Y';
+
+                    // if (pData.isNotEmpty) {
+                    //   var stickerData = getStickerFromURL(pData);
+                    //
+                    //   print('====Data===$stickerData');
+                    //
+                    //   final CollectionReference stickersCollection =
+                    //   FirebaseFirestore.instance.collection('StickerData');
+                    //
+                    //   QuerySnapshot querySnapshot = await stickersCollection
+                    //       .get();
+                    //   List<Map<String, dynamic>> data = querySnapshot.docs
+                    //       .map((doc) => doc.data() as Map<String, dynamic>)
+                    //       .toList();
+                    //   print('======StickerData=length====${data.length}');
+                    //
+                    //   List<QRData> qrDataList =
+                    //   data.map((map) => QRData.fromMap(map)).toList();
+                    //   String batchNumberFromSecureQrCode = '';
+                    //   if (qrDataList.isNotEmpty) {
+                    //
+                    //     for (var qrData in qrDataList) {
+                    //       if(qrData.serialNoSecuredQR.trim() == 'BA813GLSO10HU7L3'){
+                    //         print('=========BA813GLSO10HU7L3=========');
+                    //       }
+                    //       if (qrData.serialNoSecuredQR.trim() == stickerData.trim()) {
+                    //         batchNumberFromSecureQrCode = qrData.serialNoNormalQR;
+                    //       }
+                    //     }
+                    //   } else {
+                    //     Utils.showToastMessage(
+                    //         'Please Upload Secure QR Codes', context);
+                    //   }
+                    //
+                    //   print('batchNumberFromSecureQrCode====$batchNumberFromSecureQrCode');
+                    //
+                    //   if (batchNumberFromSecureQrCode.isNotEmpty) {
+                    //     List<BatchInfo> batchListData = await fetchBatchInfo();
+                    //     List<STICKERDETAILS> batchStickerData = [];
+                    //     /*
+                    //    *
+                    //    * get All sticker from Batch Table
+                    //    *
+                    //    * */
+                    //     // print('==batchListData=====length===${batchListData.length}');
+                    //     if (batchListData.isNotEmpty) {
+                    //       for (int i = 0; i < batchListData.length; i++) {
+                    //         batchStickerData.addAll(batchListData[i].stickers);
+                    //       }
+                    //     }
+                    //
+                    //     List<String?> stickerCodes = batchStickerData
+                    //         .map((sticker) => sticker.vARSTICKER)
+                    //         .toList();
+                    //     // print('===stickerCodes====${stickerCodes.toString()}');
+                    //     bool exists =
+                    //     stickerCodes.contains(batchNumberFromSecureQrCode);
+                    //
+                    //     if (exists) {
+                    //       List<
+                    //           DispatchModel> dispatchedData = await fetchDispatch();
+                    //
+                    //       List<STICKERDETAILS> dispatchedStickerData = [];
+                    //       List<STICKERDETAILS> receiveStickerData = [];
+                    //
+                    //       /*
+                    //      *
+                    //      * get All sticker from Dispatch Table
+                    //      *
+                    //      * */
+                    //       // print('==batchListData==111===length===${dispatchedData.length}');
+                    //       if (dispatchedData.isNotEmpty) {
+                    //         for (int i = 0; i < dispatchedData.length; i++) {
+                    //           if (dispatchedData[i].isReceived == 'N') {
+                    //             dispatchedStickerData
+                    //                 .addAll(dispatchedData[i].stickers);
+                    //           } else {
+                    //             receiveStickerData.addAll(
+                    //                 dispatchedData[i].stickers);
+                    //           }
+                    //         }
+                    //       }
+                    //
+                    //       List<String?> stickerCodes1 = dispatchedStickerData
+                    //           .map((sticker) => sticker.vARSTICKER)
+                    //           .toList();
+                    //       print(
+                    //           '===stickerCodes1==11==${stickerCodes1
+                    //               .toString()}');
+                    //       print('===stickerNo==11==$batchNumberFromSecureQrCode');
+                    //       bool exists1 =
+                    //       stickerCodes1.contains(batchNumberFromSecureQrCode);
+                    //       print('===exists1==$exists1');
+                    //       if (!exists1) {
+                    //         /*
+                    //       *
+                    //       * Receive Data Get from Dispatch Table
+                    //       *
+                    //       * */
+                    //         List<String?> stickerCodes2 = receiveStickerData
+                    //             .map((sticker) => sticker.vARSTICKER)
+                    //             .toList();
+                    //         print(
+                    //             '===stickerCodes1==22==${stickerCodes2
+                    //                 .toString()}');
+                    //         print(
+                    //             '===stickerNo==22==$batchNumberFromSecureQrCode');
+                    //         bool exists2 =
+                    //         stickerCodes2.contains(batchNumberFromSecureQrCode);
+                    //
+                    //         if (exists2) {
+                    //           int index = stickerCodes.indexWhere((stickerCode) =>
+                    //           stickerCode == batchNumberFromSecureQrCode);
+                    //           STICKERDETAILS stickerdetailsModel =
+                    //           batchStickerData[index];
+                    //
+                    //           setState(() {
+                    //             _loading = false;
+                    //           });
+                    //           print(
+                    //               '===varBatchName==${stickerdetailsModel
+                    //                   .varBatchName}');
+                    //           print(
+                    //               '===varBatchMfg==${stickerdetailsModel
+                    //                   .varBatchMfg}');
+                    //           print(
+                    //               '===varBatchExp==${stickerdetailsModel
+                    //                   .varBatchExp}');
+                    //
+                    //           await Navigator.push(
+                    //             context,
+                    //             MaterialPageRoute(
+                    //                 builder: (context) =>
+                    //                     DeliveryBatchInfoScreen(
+                    //                       batchNo: stickerdetailsModel
+                    //                           .varBatchName,
+                    //                       mfgDate: stickerdetailsModel
+                    //                           .varBatchMfg,
+                    //                       expDate: stickerdetailsModel
+                    //                           .varBatchExp,
+                    //                     )),
+                    //           );
+                    //         } else {
+                    //           setState(() {
+                    //             _loading = false;
+                    //           });
+                    //           Utils.showToastMessage(
+                    //               'Sticker does not find in receive table.',
+                    //               context);
+                    //         }
+                    //       } else {
+                    //         setState(() {
+                    //           _loading = false;
+                    //         });
+                    //         Utils.showToastMessage(
+                    //             'Sticker have not received yet.', context);
+                    //       }
+                    //     } else {
+                    //       setState(() {
+                    //         _loading = false;
+                    //       });
+                    //       Utils.showToastMessage(
+                    //           'Sticker does not map with batch.', context);
+                    //     }
+                    //   } else {
+                    //     setState(() {
+                    //       _loading = false;
+                    //     });
+                    //     Utils.showToastMessage(
+                    //         'Normal QR Code is missing.', context);
+                    //   }
+                    //
+                    // } else {
+                    //   setState(() {
+                    //     _loading = false;
+                    //   });
+                    //   Utils.showToastMessage(
+                    //       'Please Scan QR Code Again', context);
+                    // }
+                    navigateToAuthenticScreen('https://va1.ecubix.com:4447/GenuineView');
+                  } else if (code[1].toString().toUpperCase() == 'FAIL') {
+                    isValid = 'N';
+                    navigateToAuthenticScreen('https://va1.ecubix.com:4447/FakeView');
+                    // await Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //       builder: (context) =>
+                    //           DeliveryBatchInfoScreen(
+                    //             batchNo: '',
+                    //             mfgDate: '',
+                    //             expDate: '',
+                    //           )),
+                    // );
+                  } else {
+                    // isValid = '';
+                    // showReceiveDialog();
+                    // Utils.showToastMessage(code[1].toString(), mContext!);
+                    Utils.showToastMessage(code[1].toString());
+                  }
+
+                } else if (code[0].toString() == 'PData') {
+                  // optionScreenBloc.progressEvent(false);
+
+                  // Utils.showToastMessage(code[1].toString());
+                  print('====PData===${code[1].toString()}');
+                  print('====PData===$isValid');
+                  // pData = code[1].toString();
+
+                } else {
+                  // setState(() {
+                  //   _loading = false;
+                  // });
+                  optionScreenBloc.setBusy(false);
+                  print('====Else===${code[1].toString()}');
+                }
+              }
+            } else if (state['type'] == '888') {
+
+              // setState(() {
+              //   _loading = false;
+              // });
+              optionScreenBloc.setBusy(false);
+
+              print('==========8888888888888========');
+              // if(!isShowDialog) {
+              await showReceiveDialog();
+              // }
+            }
+          } catch (e) {
+            print('====Catch=======${e.toString()}');
+            // try {
+            // setState(() {
+            //   _loading = false;
+            // });
+            optionScreenBloc.setBusy(false);
+            // }catch(e){
+            //   print(e.toString());
+            // }
+
+            // print('==========showReceiveDialog========$isShowDialog');
+            // if(!isShowDialog) {
+            await showReceiveDialog();
+            // }
+          }
+        // });
+
+      /*try {
         print('=======state=======${state.toString()}');
         if (state['type'] == '777') {
           var detailsData = state['Details'];
@@ -78,7 +361,6 @@ class _OptionScreenState extends State<OptionScreen> {
               }
             } else if (code[0].toString() == 'PData') {
               optionScreenBloc.progressEvent(false);
-              // Utils.showToastMessage(code[1].toString());
               print('====PData===${code[1].toString()}');
 
               if (code[1].toString().isNotEmpty) {
@@ -94,12 +376,7 @@ class _OptionScreenState extends State<OptionScreen> {
                     print(e.toString());
                   }
 
-                  // apicall
                   print("test--" + currentLocation.toString());
-
-                  /*await optionScreenBloc.getUrlFromStricker(
-                      'I1ELUFW9',
-                      currentLocation);*/
 
                   getData(code[1].toString());
 
@@ -125,38 +402,11 @@ class _OptionScreenState extends State<OptionScreen> {
                         .getUrlFromSticker()!);
                     if (optionScreenBloc.uniqueData!.isNotEmpty) {
 
-                      // var isSDKScan =
-                      // await sharedPrefs
-                      //     .getString(
-                      //     PREF_IS_SDK_SCAN_ENABLE);
-                      // if (isSDKScan == 'N') {
-                      //   setState(
-                      //           () {
-                      //         optionScreenBloc
-                      //             .serialController
-                      //             .clear();
-                      //       });
-                      //
-                      //   await Navigator.of(context).push(MaterialPageRoute(
-                      //       builder: (context) => ProductDetailScreen(
-                      //           optionScreenBloc.uniqueData,
-                      //           optionScreenBloc.batchNo,
-                      //           optionScreenBloc.mfgdate,
-                      //           optionScreenBloc.exdate,
-                      //           widget.mNo,
-                      //           optionScreenBloc.url,
-                      //           isValid)));
-                      // } else {
                         navigateToAuthenticScreen();
-                      // }
+
                     }
                   } else {
-                    // setState(
-                    //         () {
-                    //       optionScreenBloc
-                    //           .serialController
-                    //           .clear();
-                    //     });
+
                     Utils.showToastMessage(
                         LocaleUtils.getString(mContext, 'invalid_qr_code'));
                   }
@@ -178,11 +428,119 @@ class _OptionScreenState extends State<OptionScreen> {
         }
       } catch (e) {
         print(e.toString());
-      }
+      }*/
     });
   }
 
-  void navigateToAuthenticScreen() async{
+  showReceiveDialog() async {
+    // isShowDialog = true;
+    await showDialog(
+      barrierDismissible: false,
+      context: mContext!,
+      builder: (context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15.0),
+          ),
+          backgroundColor: Colors.white,
+          child: Container(
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15.0), color: Colors.white),
+            padding: const EdgeInsets.only(top: 10),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Lottie.asset('assets/retry_anim.json', width: 150,
+                    height: 150),
+                 Padding(
+                  padding: EdgeInsets.only(left: 10, right: 10),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Note:',
+                        style: TextStyle(
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
+                      ),
+                      SizedBox(height: 10.0),
+                      Text(
+                        '• Keep your hand steady while capturing the image.\n'
+                            '• Make sure the image remains clear and is not blurred.\n'
+                            '• Ensure proper lighting while capturing the image.',
+                        style: TextStyle(
+                          fontSize: 16.0,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                Padding(
+                  padding: const EdgeInsets.only(
+                      top: 20, left: 20, right: 20, bottom: 25),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+
+
+                      Expanded(
+                        flex: 1,
+                        child: ButtonWidgets(
+                          buttonName: 'Retry',
+                          buttonColor: Color(colorPrimary),
+                          textColor: Colors.white,
+                          onTap: () async {
+                            // isShowDialog = false;
+                            Navigator.of(context).pop();
+
+                            var isConnection = await _battery.checkInternet();
+                            if (isConnection.contains('true')) {
+                              // dispatchInfo = '';
+                              // CameraScanScreenState.scanStciker.clear();
+                              //
+                              // var batchInfo = DeliveryModel(
+                              //   customerName: customerDetailsTxtController.text.trim(),
+                              //   mobileNumber: mobileNoTxtController.text.trim(),
+                              //   isDeliver: 'N',
+                              //   stickers: [],
+                              // );
+                              //
+                              // // Convert BatchInfo object to JSON string
+                              // dispatchInfo = jsonEncode(batchInfo.toJson());
+                              // print('===Delivery Info====$dispatchInfo');
+
+                              isValid = '';
+                              // pData = '';
+                              await _battery.scanQRCodeViaSDK();
+                            } else {
+                              Utils.showToastMessage(
+                                  LocaleUtils.getString(
+                                      mContext,
+                                      'no_internet_connection'));
+                            }
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void navigateToAuthenticScreen(String urlVal) async{
       // only for dev
       // print("print===${widget.scanData!.contains("https://www.ivcs.ai:8090")}");
       // if(widget.scanData!.contains('https://www.ivcs.ai:8090')){
@@ -193,24 +551,24 @@ class _OptionScreenState extends State<OptionScreen> {
       // }
       // print("widget.scanData===${widget.scanData}");
 
-      var url;
-      if(isValid!.isNotEmpty) {
-        url =
-        '${optionScreenBloc.url}&MOB=${widget.mNo}&LAT=${currentLocation != null
-            ? currentLocation!.latitude
-            : ''}&LONG=${currentLocation != null
-            ? currentLocation!.longitude
-            : ''}&DVC=${await Utils.getDeviceID()}&FRM=D&LNG=1&IsValid=$isValid';
-      } else {
-        url =
-        '${optionScreenBloc.url}&MOB=${widget.mNo}&LAT=${currentLocation != null
-            ? currentLocation!.latitude
-            : ''}&LONG=${currentLocation != null
-            ? currentLocation!.longitude
-            : ''}&DVC=${await Utils.getDeviceID()}&FRM=D&LNG=1';
-      }
+      // var url;
+      // if(isValid!.isNotEmpty) {
+      //   url =
+      //   '${optionScreenBloc.url}&MOB=${widget.mNo}&LAT=${currentLocation != null
+      //       ? currentLocation!.latitude
+      //       : ''}&LONG=${currentLocation != null
+      //       ? currentLocation!.longitude
+      //       : ''}&DVC=${await Utils.getDeviceID()}&FRM=D&LNG=1&IsValid=$isValid';
+      // } else {
+      //   url =
+      //   '${optionScreenBloc.url}&MOB=${widget.mNo}&LAT=${currentLocation != null
+      //       ? currentLocation!.latitude
+      //       : ''}&LONG=${currentLocation != null
+      //       ? currentLocation!.longitude
+      //       : ''}&DVC=${await Utils.getDeviceID()}&FRM=D&LNG=1';
+      // }
       var isBack = await Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => WebViewScreen(url)));
+          .push(MaterialPageRoute(builder: (context) => WebViewScreen(urlVal)));
 
       // if (isBack != null && isBack) {
       //   Navigator.pop(context, true);
@@ -264,214 +622,221 @@ class _OptionScreenState extends State<OptionScreen> {
                                           MediaQuery.of(context).size.height,
                                       decoration: BoxDecoration(
                                           color: Colors.white,
-                                          borderRadius: BorderRadius.only(
-                                              topLeft: Radius.circular(25),
-                                              topRight: Radius.circular(20))),
+                                          // borderRadius: BorderRadius.only(
+                                          //     topLeft: Radius.circular(25),
+                                          //     topRight: Radius.circular(20))
+                                      ),
                                       child: Column(
                                         children: [
                                           Expanded(
                                             child: Column(
                                               children: [
-                                                Container(
-                                                  child: Column(
-                                                    children: [
-                                                      FadeBUAnimation(
-                                                          1,
-                                                          Container(
-                                                            height: 50,
-                                                            padding:
-                                                                EdgeInsets.all(
-                                                                    5),
-                                                            margin:
-                                                                EdgeInsets.only(
-                                                                    left: 20,
-                                                                    right: 20,
-                                                                    top: 50,
-                                                                    bottom: 25),
-                                                            decoration: BoxDecoration(
-                                                                border: Border.all(
-                                                                    color: Colors
-                                                                        .grey)),
-                                                            child: Row(
-                                                              children: [
-                                                                Expanded(
+                                                Visibility(
+                                                  visible: false,
+                                                  child: Container(
+                                                    child: Column(
+                                                      children: [
+                                                        FadeBUAnimation(
+                                                            1,
+                                                            Container(
+                                                              height: 50,
+                                                              padding:
+                                                                  EdgeInsets.all(
+                                                                      5),
+                                                              margin:
+                                                                  EdgeInsets.only(
+                                                                      left: 20,
+                                                                      right: 20,
+                                                                      top: 50,
+                                                                      bottom: 25),
+                                                              decoration: BoxDecoration(
+                                                                  border: Border.all(
+                                                                      color: Colors
+                                                                          .grey)),
+                                                              child: Row(
+                                                                children: [
+                                                                  Expanded(
+                                                                      child:
+                                                                          Container(
+                                                                    alignment:
+                                                                        Alignment
+                                                                            .centerLeft,
                                                                     child:
-                                                                        Container(
-                                                                  alignment:
-                                                                      Alignment
-                                                                          .centerLeft,
-                                                                  child:
-                                                                      searialTextField(),
-                                                                )),
-                                                              ],
-                                                            ),
-                                                          )),
-                                                      FadeBUAnimation(
-                                                        1.5,
-                                                        Align(
-                                                          alignment:
-                                                              Alignment.center,
-                                                          child: InkWell(
-                                                            onTap: () async {
-                                                              Utils
-                                                                  .hideKeyBoard(
-                                                                      context);
+                                                                        searialTextField(),
+                                                                  )),
+                                                                ],
+                                                              ),
+                                                            )),
+                                                        FadeBUAnimation(
+                                                          1.5,
+                                                          Align(
+                                                            alignment:
+                                                                Alignment.center,
+                                                            child: InkWell(
+                                                              onTap: () async {
+                                                                Utils
+                                                                    .hideKeyBoard(
+                                                                        context);
 
-                                                              if (await checkValidation()) {
-                                                                if (await Utils
-                                                                    .checkInternetConnection()) {
-                                                                  print("test--" +
-                                                                      Constant
-                                                                          .locationPermission
-                                                                          .toString());
-                                                                  try {
-                                                                    if (Constant
-                                                                        .locationPermission) {
+                                                                if (await checkValidation()) {
+                                                                  if (await Utils
+                                                                      .checkInternetConnection()) {
+                                                                    print("test--" +
+                                                                        Constant
+                                                                            .locationPermission
+                                                                            .toString());
+                                                                    try {
+                                                                      if (Constant
+                                                                          .locationPermission) {
+                                                                        optionScreenBloc
+                                                                            .setBusy(
+                                                                                true);
+                                                                        await getUserLocation();
+                                                                      }
+                                                                    } catch (e) {
                                                                       optionScreenBloc
                                                                           .setBusy(
-                                                                              true);
-                                                                      await getUserLocation();
-                                                                    }
-                                                                  } catch (e) {
-                                                                    optionScreenBloc
-                                                                        .setBusy(
-                                                                            false);
-                                                                    print(e
-                                                                        .toString());
-                                                                  }
-
-                                                                  // apicall
-                                                                  print("test--" +
-                                                                      currentLocation
+                                                                              false);
+                                                                      print(e
                                                                           .toString());
+                                                                    }
 
-                                                                  await optionScreenBloc.getUrlFromStricker(
-                                                                      optionScreenBloc
-                                                                          .serialController
-                                                                          .text
-                                                                          .trim(),
-                                                                      currentLocation);
+                                                                    // apicall
+                                                                    print("test--" +
+                                                                        currentLocation
+                                                                            .toString());
 
-                                                                  if (optionScreenBloc.generalResponseModel != null &&
-                                                                      optionScreenBloc
-                                                                              .generalResponseModel!
-                                                                              .status ==
-                                                                          '1' &&
-                                                                      optionScreenBloc
-                                                                              .generalResponseModel!
-                                                                              .getUrlFromSticker() !=
-                                                                          null &&
-                                                                      optionScreenBloc
+                                                                    await optionScreenBloc.getUrlFromStricker(
+                                                                        optionScreenBloc
+                                                                            .serialController
+                                                                            .text
+                                                                            .trim(),
+                                                                        currentLocation);
+
+                                                                    if (optionScreenBloc.generalResponseModel != null &&
+                                                                        optionScreenBloc
+                                                                                .generalResponseModel!
+                                                                                .status ==
+                                                                            '1' &&
+                                                                        optionScreenBloc
+                                                                                .generalResponseModel!
+                                                                                .getUrlFromSticker() !=
+                                                                            null &&
+                                                                        optionScreenBloc
+                                                                            .generalResponseModel!
+                                                                            .getUrlFromSticker()!
+                                                                            .isNotEmpty) {
+                                                                      await optionScreenBloc.setUrl(optionScreenBloc
                                                                           .generalResponseModel!
-                                                                          .getUrlFromSticker()!
+                                                                          .getUrlFromSticker());
+                                                                      getData(optionScreenBloc
+                                                                          .generalResponseModel!
+                                                                          .getUrlFromSticker()!);
+                                                                      if (optionScreenBloc
+                                                                          .uniqueData!
                                                                           .isNotEmpty) {
-                                                                    await optionScreenBloc.setUrl(optionScreenBloc
-                                                                        .generalResponseModel!
-                                                                        .getUrlFromSticker());
-                                                                    getData(optionScreenBloc
-                                                                        .generalResponseModel!
-                                                                        .getUrlFromSticker()!);
-                                                                    if (optionScreenBloc
-                                                                        .uniqueData!
-                                                                        .isNotEmpty) {
+                                                                        setState(
+                                                                            () {
+                                                                          optionScreenBloc
+                                                                              .serialController
+                                                                              .clear();
+                                                                        });
+                                                                        await Navigator.of(context).push(MaterialPageRoute(
+                                                                            builder: (context) => ProductDetailScreen(
+                                                                                optionScreenBloc.uniqueData,
+                                                                                optionScreenBloc.batchNo,
+                                                                                optionScreenBloc.mfgdate,
+                                                                                optionScreenBloc.exdate,
+                                                                                widget.mNo,
+                                                                                optionScreenBloc.url,
+                                                                                '')));
+                                                                      }
+                                                                    } else {
                                                                       setState(
                                                                           () {
                                                                         optionScreenBloc
                                                                             .serialController
                                                                             .clear();
                                                                       });
-                                                                      await Navigator.of(context).push(MaterialPageRoute(
-                                                                          builder: (context) => ProductDetailScreen(
-                                                                              optionScreenBloc.uniqueData,
-                                                                              optionScreenBloc.batchNo,
-                                                                              optionScreenBloc.mfgdate,
-                                                                              optionScreenBloc.exdate,
-                                                                              widget.mNo,
-                                                                              optionScreenBloc.url,
-                                                                              '')));
+                                                                      Utils.showToastMessage(LocaleUtils.getString(
+                                                                          mContext,
+                                                                          'invalid_qr_code'));
                                                                     }
                                                                   } else {
-                                                                    setState(
-                                                                        () {
-                                                                      optionScreenBloc
-                                                                          .serialController
-                                                                          .clear();
-                                                                    });
-                                                                    Utils.showToastMessage(LocaleUtils.getString(
-                                                                        mContext,
-                                                                        'invalid_qr_code'));
+                                                                    Utils.showToastMessage(
+                                                                        LocaleUtils.getString(
+                                                                            mContext,
+                                                                            'no_internet_connection'));
                                                                   }
-                                                                } else {
-                                                                  Utils.showToastMessage(
-                                                                      LocaleUtils.getString(
-                                                                          mContext,
-                                                                          'no_internet_connection'));
                                                                 }
-                                                              }
-                                                            },
-                                                            child: Container(
-                                                              margin: EdgeInsets
-                                                                  .only(
-                                                                      top: 10),
-                                                              decoration: BoxDecoration(
-                                                                  // color: provider
-                                                                  //             .serialController
-                                                                  //             .text
-                                                                  //             .length ==
-                                                                  //         10
-                                                                  //     ? Color(colorPrimary)
-                                                                  //     : Color(
-                                                                  //         colorPrimaryDark),
-                                                                  color: Color(colorPrimary),
-                                                                  borderRadius: BorderRadius.all(Radius.circular(5))),
-                                                              padding: EdgeInsets
-                                                                  .only(
-                                                                      left: 30,
-                                                                      right: 30,
-                                                                      top: 10,
-                                                                      bottom:
-                                                                          10),
-                                                              child: Text(
-                                                                LocaleUtils
-                                                                    .getString(
-                                                                        mContext,
-                                                                        'Continue'),
-                                                                style: TextStyle(
-                                                                    color: Colors
-                                                                        .white,
-                                                                    fontFamily:
-                                                                        'Roboto',
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w400,
-                                                                    fontSize:
-                                                                        20),
+                                                              },
+                                                              child: Container(
+                                                                margin: EdgeInsets
+                                                                    .only(
+                                                                        top: 10),
+                                                                decoration: BoxDecoration(
+                                                                    // color: provider
+                                                                    //             .serialController
+                                                                    //             .text
+                                                                    //             .length ==
+                                                                    //         10
+                                                                    //     ? Color(colorPrimary)
+                                                                    //     : Color(
+                                                                    //         colorPrimaryDark),
+                                                                    color: Color(colorPrimary),
+                                                                    borderRadius: BorderRadius.all(Radius.circular(5))),
+                                                                padding: EdgeInsets
+                                                                    .only(
+                                                                        left: 30,
+                                                                        right: 30,
+                                                                        top: 10,
+                                                                        bottom:
+                                                                            10),
+                                                                child: Text(
+                                                                  LocaleUtils
+                                                                      .getString(
+                                                                          mContext,
+                                                                          'Continue'),
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .white,
+                                                                      fontFamily:
+                                                                          'Roboto',
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w400,
+                                                                      fontSize:
+                                                                          20),
+                                                                ),
                                                               ),
                                                             ),
                                                           ),
                                                         ),
-                                                      ),
-                                                    ],
+                                                      ],
+                                                    ),
                                                   ),
                                                 ),
-                                                FadeBUAnimation(
-                                                    2,
-                                                    Container(
-                                                      margin: EdgeInsets.only(
-                                                          top: 30, bottom: 30),
-                                                      child: Text(
-                                                        LocaleUtils.getString(
-                                                            mContext, 'or'),
-                                                        style: TextStyle(
-                                                            fontSize: 19,
-                                                            fontFamily:
-                                                                'Roboto',
-                                                            fontWeight:
-                                                                FontWeight.w400,
-                                                            color:
-                                                                Colors.black),
-                                                      ),
-                                                    )),
+                                                Visibility(
+                                                  visible: false,
+                                                  child: FadeBUAnimation(
+                                                      2,
+                                                      Container(
+                                                        margin: EdgeInsets.only(
+                                                            top: 30, bottom: 30),
+                                                        child: Text(
+                                                          LocaleUtils.getString(
+                                                              mContext, 'or'),
+                                                          style: TextStyle(
+                                                              fontSize: 19,
+                                                              fontFamily:
+                                                                  'Roboto',
+                                                              fontWeight:
+                                                                  FontWeight.w400,
+                                                              color:
+                                                                  Colors.black),
+                                                        ),
+                                                      )),
+                                                ),
                                                 FadeBUAnimation(
                                                     2.5,
                                                     InkWell(
@@ -540,64 +905,62 @@ class _OptionScreenState extends State<OptionScreen> {
                                                           }
                                                         }
                                                       },
-                                                      child: SizedBox(
-                                                        height: 50,
-                                                        child: Container(
-                                                          margin:
-                                                              EdgeInsets.only(
-                                                            left: 20,
-                                                            right: 20,
-                                                          ),
-                                                          decoration: BoxDecoration(
-                                                              color: Color(
-                                                                  colorPrimary),
-                                                              borderRadius: BorderRadius
-                                                                  .all(Radius
-                                                                      .circular(
-                                                                          10)),
-                                                              border: Border.all(
-                                                                  color: Color(
-                                                                      colorPrimary))),
-                                                          padding:
-                                                              EdgeInsets.all(5),
-                                                          child: Row(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .center,
-                                                            children: [
-                                                              Icon(
-                                                                Icons
-                                                                    .camera_alt,
-                                                                color: Colors
-                                                                    .white,
-                                                                size: 40,
+                                                      child: Container(
+                                                        margin:
+                                                            EdgeInsets.only(
+                                                          left: 20,
+                                                          top: 50,
+                                                          right: 20,
+                                                        ),
+                                                        decoration: BoxDecoration(
+                                                            color: Color(
+                                                                colorPrimary),
+                                                            borderRadius: BorderRadius
+                                                                .all(Radius
+                                                                    .circular(
+                                                                        10)),
+                                                            border: Border.all(
+                                                                color: Color(
+                                                                    colorPrimary))),
+                                                        padding:
+                                                            EdgeInsets.all(5),
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            Icon(
+                                                              Icons
+                                                                  .camera_alt,
+                                                              color: Colors
+                                                                  .white,
+                                                              size: 40,
+                                                            ),
+                                                            Container(
+                                                              padding: EdgeInsets
+                                                                  .only(
+                                                                      left:
+                                                                          20),
+                                                              child: Text(
+                                                                LocaleUtils.getString(
+                                                                    mContext,
+                                                                    'qr_code_scan'),
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .center,
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        17,
+                                                                    fontFamily:
+                                                                        'Roboto',
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400,
+                                                                    color: Colors
+                                                                        .white),
                                                               ),
-                                                              Container(
-                                                                padding: EdgeInsets
-                                                                    .only(
-                                                                        left:
-                                                                            20),
-                                                                child: Text(
-                                                                  LocaleUtils.getString(
-                                                                      mContext,
-                                                                      'qr_code_scan'),
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .center,
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          17,
-                                                                      fontFamily:
-                                                                          'Roboto',
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w400,
-                                                                      color: Colors
-                                                                          .white),
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          ),
+                                                            ),
+                                                          ],
                                                         ),
                                                       ),
                                                     )),

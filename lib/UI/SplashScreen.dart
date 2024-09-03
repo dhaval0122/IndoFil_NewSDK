@@ -94,15 +94,18 @@ class _SplashScreenState extends State<SplashScreen> {
                   SizedBox(
                     height: 20,
                   ),
-                  Text(
-                    // 'Chanel Performance\nManagement',
-                    'Channel Performance\nManagement',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontSize: 22,
-                        color: Colors.white,
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.w600),
+                  Visibility(
+                    visible: false,
+                    child: Text(
+                      // 'Chanel Performance\nManagement',
+                      'Channel Performance\nManagement',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: 22,
+                          color: Colors.white,
+                          fontFamily: 'Roboto',
+                          fontWeight: FontWeight.w600),
+                    ),
                   ),
                   Visibility(
                     visible: false,
