@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_basf_hk_app/UI/OptionScreen.dart';
 import 'package:flutter_basf_hk_app/Utils/CustomAppBar.dart';
 import 'package:flutter_basf_hk_app/styles/colors.dart';
-import 'package:pinput/pinput.dart';
+// import 'package:pinput/pinput.dart';
 import 'package:provider/provider.dart';
 
 import '../Prefs/SharedPrefs.dart';
@@ -103,123 +103,124 @@ class _OTPScreenScreenState extends State<OTPScreen> {
                                           alignment: Alignment.topCenter,
                                           child: Form(
                                             key: formKey,
-                                            child: Pinput(
-                                              length: 6,
-                                              controller: pinController,
-                                              focusNode: focusNode,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              inputFormatters: [
-                                                FilteringTextInputFormatter
-                                                    .digitsOnly
-                                              ],
-                                              submittedPinTheme: PinTheme(
-                                                height: 60.0,
-                                                width: 50.0,
-                                                textStyle: const TextStyle(
-                                                  fontSize: 22,
-                                                    fontFamily: 'Roboto',fontWeight: FontWeight.w400,
-                                                  color: Color(colorPrimary),
-                                                ),
-                                                decoration: BoxDecoration(
-                                                  shape: BoxShape.rectangle,
-                                                  // color: Color(0xFF46CCB4),
-                                                  color: Colors.white,
-                                                  borderRadius:
-                                                      BorderRadius.circular(8),
-                                                  border: Border.all(
-                                                    color: Color(colorPrimary),
-                                                    width: 1.0,
-                                                  ),
-                                                ),
-                                              ),
-                                              followingPinTheme: PinTheme(
-                                                height: 60.0,
-                                                width: 50.0,
-                                                decoration: BoxDecoration(
-                                                  shape: BoxShape.rectangle,
-                                                  borderRadius:
-                                                      BorderRadius.circular(8),
-                                                  border: Border.all(
-                                                    color: Color(colorPrimary),
-                                                    width: 1.0,
-                                                  ),
-                                                ),
-                                              ),
-                                              focusedPinTheme: PinTheme(
-                                                height: 60.0,
-                                                width: 50.0,
-                                                textStyle: const TextStyle(
-                                                  fontSize: 22,
-                                                  color: Colors.black,
-                                                  fontFamily: 'Roboto',fontWeight: FontWeight.w400,
-                                                ),
-                                                decoration: BoxDecoration(
-                                                  shape: BoxShape.rectangle,
-                                                  borderRadius:
-                                                      BorderRadius.circular(8),
-                                                  color: Colors.white,
-                                                  border: Border.all(
-                                                    color: Color(colorPrimary),
-                                                    width: 1.0,
-                                                  ),
-                                                ),
-                                              ),
-                                              onCompleted: (pin) async {
-                                                debugPrint('onCompleted: $pin');
-                                                if (pin.length == 6) {
-                                                  if (await Utils
-                                                      .checkInternetConnection()) {
-                                                    await otpBloc.callVerifyAPI(
-                                                        widget.mobileNumber!,
-                                                        pin);
-
-                                                    if (otpBloc.responseModel !=
-                                                            null &&
-                                                        otpBloc.responseModel!
-                                                                .status ==
-                                                            '1') {
-                                                      await sharedPrefs.setString(
-                                                          PREF_Mobile,
-                                                          widget.mobileNumber!);
-
-                                                      bool isOkay = await Navigator.push(
-                                                          context,
-                                                          PageRouteBuilder(
-                                                              transitionDuration:
-                                                                  Duration(
-                                                                      seconds:
-                                                                          1),
-                                                              pageBuilder: (_,
-                                                                      __,
-                                                                      ___) =>
-                                                                  OptionScreen(
-                                                                      'Scan QR Code',
-                                                                      widget
-                                                                          .mobileNumber!)));
-                                                      if (isOkay) {
-                                                        Navigator.pop(
-                                                            context, isOkay);
-                                                      }
-                                                    } else {
-                                                      Utils.showToastMessage(
-                                                          otpBloc.responseModel!
-                                                              .message!);
-                                                    }
-                                                  } else {
-                                                    Utils.showToastMessage(
-                                                        LocaleUtils.getString(
-                                                            context,
-                                                            'no_internet_connection'));
-                                                  }
-                                                }
-                                              },
-                                              onChanged: (value) {
-                                                debugPrint('onChanged: $value');
-                                              },
-                                            ),
+                                            child: Container(),
+                                            // child: Pinput(
+                                            //   length: 6,
+                                            //   controller: pinController,
+                                            //   focusNode: focusNode,
+                                            //   mainAxisAlignment:
+                                            //       MainAxisAlignment.center,
+                                            //   crossAxisAlignment:
+                                            //       CrossAxisAlignment.start,
+                                            //   inputFormatters: [
+                                            //     FilteringTextInputFormatter
+                                            //         .digitsOnly
+                                            //   ],
+                                            //   submittedPinTheme: PinTheme(
+                                            //     height: 60.0,
+                                            //     width: 50.0,
+                                            //     textStyle: const TextStyle(
+                                            //       fontSize: 22,
+                                            //         fontFamily: 'Roboto',fontWeight: FontWeight.w400,
+                                            //       color: Color(colorPrimary),
+                                            //     ),
+                                            //     decoration: BoxDecoration(
+                                            //       shape: BoxShape.rectangle,
+                                            //       // color: Color(0xFF46CCB4),
+                                            //       color: Colors.white,
+                                            //       borderRadius:
+                                            //           BorderRadius.circular(8),
+                                            //       border: Border.all(
+                                            //         color: Color(colorPrimary),
+                                            //         width: 1.0,
+                                            //       ),
+                                            //     ),
+                                            //   ),
+                                            //   followingPinTheme: PinTheme(
+                                            //     height: 60.0,
+                                            //     width: 50.0,
+                                            //     decoration: BoxDecoration(
+                                            //       shape: BoxShape.rectangle,
+                                            //       borderRadius:
+                                            //           BorderRadius.circular(8),
+                                            //       border: Border.all(
+                                            //         color: Color(colorPrimary),
+                                            //         width: 1.0,
+                                            //       ),
+                                            //     ),
+                                            //   ),
+                                            //   focusedPinTheme: PinTheme(
+                                            //     height: 60.0,
+                                            //     width: 50.0,
+                                            //     textStyle: const TextStyle(
+                                            //       fontSize: 22,
+                                            //       color: Colors.black,
+                                            //       fontFamily: 'Roboto',fontWeight: FontWeight.w400,
+                                            //     ),
+                                            //     decoration: BoxDecoration(
+                                            //       shape: BoxShape.rectangle,
+                                            //       borderRadius:
+                                            //           BorderRadius.circular(8),
+                                            //       color: Colors.white,
+                                            //       border: Border.all(
+                                            //         color: Color(colorPrimary),
+                                            //         width: 1.0,
+                                            //       ),
+                                            //     ),
+                                            //   ),
+                                            //   onCompleted: (pin) async {
+                                            //     debugPrint('onCompleted: $pin');
+                                            //     if (pin.length == 6) {
+                                            //       if (await Utils
+                                            //           .checkInternetConnection()) {
+                                            //         await otpBloc.callVerifyAPI(
+                                            //             widget.mobileNumber!,
+                                            //             pin);
+                                            //
+                                            //         if (otpBloc.responseModel !=
+                                            //                 null &&
+                                            //             otpBloc.responseModel!
+                                            //                     .status ==
+                                            //                 '1') {
+                                            //           await sharedPrefs.setString(
+                                            //               PREF_Mobile,
+                                            //               widget.mobileNumber!);
+                                            //
+                                            //           bool isOkay = await Navigator.push(
+                                            //               context,
+                                            //               PageRouteBuilder(
+                                            //                   transitionDuration:
+                                            //                       Duration(
+                                            //                           seconds:
+                                            //                               1),
+                                            //                   pageBuilder: (_,
+                                            //                           __,
+                                            //                           ___) =>
+                                            //                       OptionScreen(
+                                            //                           'Scan QR Code',
+                                            //                           widget
+                                            //                               .mobileNumber!)));
+                                            //           if (isOkay) {
+                                            //             Navigator.pop(
+                                            //                 context, isOkay);
+                                            //           }
+                                            //         } else {
+                                            //           Utils.showToastMessage(
+                                            //               otpBloc.responseModel!
+                                            //                   .message!);
+                                            //         }
+                                            //       } else {
+                                            //         Utils.showToastMessage(
+                                            //             LocaleUtils.getString(
+                                            //                 context,
+                                            //                 'no_internet_connection'));
+                                            //       }
+                                            //     }
+                                            //   },
+                                            //   onChanged: (value) {
+                                            //     debugPrint('onChanged: $value');
+                                            //   },
+                                            // ),
                                           ),
                                         ),
                                       ),

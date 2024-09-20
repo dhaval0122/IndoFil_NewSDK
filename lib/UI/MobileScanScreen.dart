@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:audioplayers/audioplayers.dart';
+// import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -56,7 +56,7 @@ class _MobileScanScreenState extends State<MobileScanScreen>
 
   late TextEditingController serialNumberController;
 
-  late AudioCache player;
+  // late AudioCache player;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
 
   @override
@@ -96,7 +96,7 @@ class _MobileScanScreenState extends State<MobileScanScreen>
 
     super.initState();
 
-    player = AudioCache();
+    // player = AudioCache();
     controller =
         AnimationController(vsync: this, duration: Duration(milliseconds: 700));
     scaleAnimation = CurvedAnimation(parent: controller, curve: Curves.easeOut);
@@ -978,7 +978,7 @@ class _MobileScanScreenState extends State<MobileScanScreen>
   // }
 
   void beepSound() {
-    player.play(Constant.alarmAudioPath);
+    // player.play(Constant.alarmAudioPath);
     print('soundcalled');
   }
 

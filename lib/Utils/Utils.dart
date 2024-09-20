@@ -8,6 +8,7 @@ import 'dart:ui' as ui;
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:ecp_sync_plugin/ecp_sync_plugin.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -36,15 +37,15 @@ class Utils {
 //    return EcpSyncPlugin().encodeData(password, 'B4V2A1C@S#S\$F', synCode);
 //  }
 
-  bool isNumeric(String s) {
-    if (s == null) {
-      return false;
-    }
-    // ignore: deprecated_member_use
-    return double.parse(s, ((e) => null) as double Function(String)?) != null ||
-        // ignore: deprecated_member_use
-        int.parse(s, onError: ((e) => null) as int Function(String)?) != null;
-  }
+  // bool isNumeric(String s) {
+  //   if (s == null) {
+  //     return false;
+  //   }
+  //   // ignore: deprecated_member_use
+  //   return double.parse(s, ((e) => null) as double Function(String)?) != null ||
+  //       // ignore: deprecated_member_use
+  //       int.parse(s, onError: ((e) => null) as int Function(String)?) != null;
+  // }
 
 //  Future<String> getMenufacturer() async {
 //    String manufacturer = '';
@@ -257,19 +258,19 @@ class Utils {
 
   static const Widget verticalSpaceTiny = SizedBox(height: _VerticalSpaceTiny);
   static const Widget verticalSpaceSmall =
-      SizedBox(height: _VerticalSpaceSmall);
+  SizedBox(height: _VerticalSpaceSmall);
   static const Widget verticalSpaceMedium =
-      SizedBox(height: _VerticalSpaceMedium);
+  SizedBox(height: _VerticalSpaceMedium);
   static const Widget verticalSpaceLarge =
-      SizedBox(height: _VerticalSpaceLarge);
+  SizedBox(height: _VerticalSpaceLarge);
 
   static const Widget horizontalSpaceTiny = SizedBox(width: _VerticalSpaceTiny);
   static const Widget horizontalSpaceSmall =
-      SizedBox(width: _VerticalSpaceSmall);
+  SizedBox(width: _VerticalSpaceSmall);
   static const Widget horizontalSpaceMedium =
-      SizedBox(width: _VerticalSpaceMedium);
+  SizedBox(width: _VerticalSpaceMedium);
   static const Widget horizontalSpaceLarge =
-      SizedBox(width: _VerticalSpaceLarge);
+  SizedBox(width: _VerticalSpaceLarge);
 
   static String randomString(int strlen) {
     Random rnd = Random(DateTime.now().millisecondsSinceEpoch);
@@ -294,7 +295,8 @@ class Utils {
     try {
       header[Constant.SubModuleName] = Platform.isAndroid
           ? Constant.subModule_android
-          : Constant.subModule_iOS;
+          : Constant.subModule_android;
+          // : Constant.subModule_iOS;
       header[Constant.Version] = packageInfo.version;
       header[Constant.DeviceId] = await getDeviceID();
     } on Exception catch (e) {
@@ -356,7 +358,7 @@ class Utils {
       if (Platform.isAndroid) {
         final AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
         //print('Running on Android:${androidInfo.androidId}');
-        deviceId = androidInfo.androidId;
+        deviceId = androidInfo.id;
       } else if (Platform.isIOS) {
         //appType = 'ios';
         final IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
@@ -439,7 +441,7 @@ class Utils {
             jsonDecode(await sharedPrefs.getString(Constant.USER_DATA)));
         header['user_id'] = loginResModel.userId /*"6941"*/;
         header['password'] =
-            await sharedPrefs.getString(Constant.USER_PASSWORD);
+        await sharedPrefs.getString(Constant.USER_PASSWORD);
 //        header['user_id'] = "6941";
         header['country_id'] = loginResModel.countryId /*"98"*/;
 
@@ -559,23 +561,23 @@ class Utils {
     bool? isWhich = await showDialog(
         context: context,
         builder: (BuildContext context) => CustomLogoutAlertDialog(
-              title: LocaleUtils.getString(context, 'alert'),
-              title4: LocaleUtils.getString(context, 'take_lateast_version'),
-              text: LocaleUtils.getString(context, 'OK'),
-              text1: LocaleUtils.getString(context, 'Cancel_'),
-              confirmColor: Color(value),
-              cancelColor: Color(colorPrimary),
-              textColor: Colors.white,
-              textColor1: Colors.white,
-              onPressedCancel: () {
-                Navigator.pop(context, false);
-              },
-              onPressedConfirm: () async {
-                // Navigator.pop(context, true);
-                // await Navigator.of(context).push(MaterialPageRoute(
-                //     builder: (context) => CheckUpdateScreen(file)));
-              },
-            ));
+          title: LocaleUtils.getString(context, 'alert'),
+          title4: LocaleUtils.getString(context, 'take_lateast_version'),
+          text: LocaleUtils.getString(context, 'OK'),
+          text1: LocaleUtils.getString(context, 'Cancel_'),
+          confirmColor: Color(value),
+          cancelColor: Color(colorPrimary),
+          textColor: Colors.white,
+          textColor1: Colors.white,
+          onPressedCancel: () {
+            Navigator.pop(context, false);
+          },
+          onPressedConfirm: () async {
+            // Navigator.pop(context, true);
+            // await Navigator.of(context).push(MaterialPageRoute(
+            //     builder: (context) => CheckUpdateScreen(file)));
+          },
+        ));
 
     return isWhich;
   }
@@ -625,8 +627,8 @@ class Utils {
   }
 
   static String encodeList(List<DrawerItem> data) => json.encode(
-        data.map<Map<String, dynamic>>((i) => DrawerItem.toMap(i)).toList(),
-      );
+    data.map<Map<String, dynamic>>((i) => DrawerItem.toMap(i)).toList(),
+  );
 
   static setMenuProperly(
       List<MenuMst> menuList, SharedPrefs sharedPrefs) async {
@@ -821,13 +823,22 @@ class Utils {
     //   return false;
     // }
 
-    var connectivityResult = await (Connectivity().checkConnectivity());
-    if (connectivityResult == ConnectivityResult.mobile) {
+    // var connectivityResult = await (Connectivity().checkConnectivity());
+    // if (connectivityResult == ConnectivityResult.mobile) {
+    //   return true;
+    // } else if (connectivityResult == ConnectivityResult.wifi) {
+    //   return true;
+    // }
+    // return false;
+
+
+    String isConnection = await EcpSyncPlugin().checkInternet();
+    if (isConnection.contains('true')) {
       return true;
-    } else if (connectivityResult == ConnectivityResult.wifi) {
-      return true;
+    } else {
+      return false;
     }
-    return false;
+
   }
 
   static Future<void> showAppInfoDialog(BuildContext mContext) async {

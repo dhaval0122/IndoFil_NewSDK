@@ -13,7 +13,6 @@ import 'package:flutter_basf_hk_app/Utils/Utils.dart';
 import 'package:flutter_basf_hk_app/blocs/MobileNumberBloc.dart';
 import 'package:flutter_basf_hk_app/components/CustomAlertDialogLogin.dart';
 import 'package:flutter_basf_hk_app/components/CustomProgressBar.dart';
-import 'package:flutter_basf_hk_app/components/FadeBUAnimation.dart';
 import 'package:flutter_basf_hk_app/localization/LocaleUtils.dart';
 import 'package:flutter_basf_hk_app/styles/colors.dart';
 import 'package:flutter_basf_hk_app/styles/dimens.dart';
@@ -83,6 +82,7 @@ class _MobileNumberScreenState extends State<MobileNumberScreen> {
         await Permission.camera.request();
 
         mobileNumber = await sharedPrefs!.getString(PREF_Mobile);
+        mobileNumberBloc!.mobileController.text = '8596745890';
         setState(() {});
       }
     });
@@ -158,8 +158,7 @@ class _MobileNumberScreenState extends State<MobileNumberScreen> {
                                                     fontWeight: FontWeight.w400,),
                                               ),
                                             ),
-                                            FadeBUAnimation(
-                                                1.5,
+
                                                 Container(
                                                   height: 50,
                                                   padding: EdgeInsets.all(5),
@@ -196,9 +195,8 @@ class _MobileNumberScreenState extends State<MobileNumberScreen> {
                                                       )),
                                                     ],
                                                   ),
-                                                )),
-                                            FadeBUAnimation(
-                                              2,
+                                                ),
+
                                               Align(
                                                 alignment: Alignment.center,
                                                 child: InkWell(
@@ -255,12 +253,11 @@ class _MobileNumberScreenState extends State<MobileNumberScreen> {
                                                   ),
                                                 ),
                                               ),
-                                            ),
+
                                           ],
                                         ),
                                       ),
-                                      FadeBUAnimation(
-                                        2.5,
+
                                         Container(
                                           alignment: Alignment.bottomCenter,
                                           margin: EdgeInsets.only(bottom: 10),
@@ -270,7 +267,7 @@ class _MobileNumberScreenState extends State<MobileNumberScreen> {
                                             fit: BoxFit.fitHeight,
                                           ),
                                         ),
-                                      )
+
                                     ],
                                   ),
                                 ),

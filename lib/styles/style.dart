@@ -6,11 +6,17 @@ ThemeData appTheme = ThemeData(
   primaryColor: const Color(colorPrimary),
   secondaryHeaderColor: const Color(colorPrimary),
   brightness: Brightness.light,
-  textTheme:
-      TextTheme().apply(bodyColor: Colors.black, displayColor: Colors.black),
-  accentColor: const Color(colorPrimary),
-  buttonColor: Colors.white,
+  textTheme: TextTheme().apply(bodyColor: Colors.black, displayColor: Colors.black),
+  colorScheme: ColorScheme.fromSwatch().copyWith(
+    secondary: const Color(colorPrimary),
+  ),
+  elevatedButtonTheme: ElevatedButtonThemeData(
+    style: ElevatedButton.styleFrom(
+      primary: Colors.white, // This is equivalent to buttonColor
+    ),
+  ),
 );
+
 
 TextStyle errorStyle = TextStyle(
     color: Colors.white,

@@ -5,7 +5,7 @@ import 'package:flutter_basf_hk_app/styles/dimens.dart';
 
 import 'Utils.dart';
 
-class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
+class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool isShowDrawerIcon, isShowBack;
   final Function onClick;
 
@@ -14,8 +14,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      toolbarHeight: 100,
-      // Set this height
+      toolbarHeight: 100, // Set this height
       elevation: 0,
       backgroundColor: Color(colorPrimary),
       automaticallyImplyLeading: false,
@@ -38,34 +37,34 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
             Expanded(child: Container()),
             isShowDrawerIcon
                 ? InkWell(
-                    onTap: () {
-                      onClick();
-                    },
-                    child: Container(
-                      alignment: Alignment.center,
-                      padding: EdgeInsets.only(
-                          right: 10, left: 10, top: 5, bottom: 5),
-                      child: Icon(
-                        Icons.delete,
-                        size: 30,
-                        color: Colors.white,
-                      ),
-                    ),
-                  )
+              onTap: () {
+                onClick();
+              },
+              child: Container(
+                alignment: Alignment.center,
+                padding: EdgeInsets.only(
+                    right: 10, left: 10, top: 5, bottom: 5),
+                child: Icon(
+                  Icons.delete,
+                  size: 30,
+                  color: Colors.white,
+                ),
+              ),
+            )
                 : isShowBack
-                    ? InkWell(
-                        onTap: () {
-                          onClick();
-                        },
-                        child: Container(
-                          alignment: Alignment.center,
-                          padding: EdgeInsets.only(
-                              right: 10, left: 10, top: 5, bottom: 5),
-                          child: Image.asset('assets/back_arrow.png',
-                              width: 30, height: 30),
-                        ),
-                      )
-                    : Container(),
+                ? InkWell(
+              onTap: () {
+                onClick();
+              },
+              child: Container(
+                alignment: Alignment.center,
+                padding: EdgeInsets.only(
+                    right: 10, left: 10, top: 5, bottom: 5),
+                child: Image.asset('assets/back_arrow.png',
+                    width: 30, height: 30),
+              ),
+            )
+                : Container(),
           ],
         ),
       ),
@@ -73,6 +72,6 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   }
 
   @override
-  // TODO: implement preferredSize
   Size get preferredSize => Size.fromHeight(100.0);
 }
+

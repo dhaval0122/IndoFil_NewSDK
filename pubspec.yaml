@@ -26,27 +26,30 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.4
-  shared_preferences: ^2.0.15
+  shared_preferences: ^2.0.20
   fluttertoast: ^8.0.9
-  connectivity_plus: ^2.3.2
-  simple_animations: ^4.0.2
+  connectivity_plus: ^6.0.3
+#  simple_animations: ^4.0.2
   supercharged: ^2.1.1
   provider: ^6.0.5
-  dio: ^4.0.6
+  dio: ^5.7.0
   permission_handler: ^11.0.0
 #  permission_handler: ^9.2.0
-  package_info_plus: ^1.4.2
+  package_info_plus: ^5.0.1
+#  package_info_plus: 5.0.1
   url_launcher: ^6.1.2
-  device_info_plus: ^3.2.3
-  http: ^0.13.4
+  device_info_plus: ^9.1.2
+  http: ^1.2.0
   qr_code_scanner: ^1.0.0
-  geolocator: ^10.0.0
-  webview_flutter: ^3.0.4
-  audioplayers: ^0.20.1
-  pinput: ^2.2.16
+  geolocator: ^11.1.0
+  webview_flutter: ^4.0.0
+  flutter_inappwebview: ^5.7.2
+#  audioplayers: ^5.2.1
+#  pinput: ^2.2.16
 #  in_app_update: ^4.0.1
-  ecp_sync_plugin: 6.8.4
-  lottie: ^2.3.2
+#  ecp_sync_plugin: 6.8.4 # For Android It is working fine backup path :: Desktop->Plugin->newSDKForScanning->18-Sep-24
+  ecp_sync_plugin: 6.9.19
+  lottie: ^3.1.2
 #  flutter_inappwebview: ^6.0.0-beta.18
 
 

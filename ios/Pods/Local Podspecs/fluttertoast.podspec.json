@@ -24,12 +24,19 @@
     ]
   },
   "pod_target_xcconfig": {
-    "EXCLUDED_ARCHS[sdk=iphonesimulator*]": "arm64"
+    "VALID_ARCHS": "x86_64 armv7 arm64",
+    "DEFINES_MODULE": "YES"
   },
-  "user_target_xcconfig": {
-    "EXCLUDED_ARCHS[sdk=iphonesimulator*]": "arm64"
+  "resource_bundles": {
+    "fluttertoast_privacy": [
+      "Resources/PrivacyInfo.xcprivacy"
+    ]
   },
   "platforms": {
-    "ios": "8.0"
+    "osx": null,
+    "ios": null,
+    "tvos": null,
+    "visionos": null,
+    "watchos": null
   }
 }

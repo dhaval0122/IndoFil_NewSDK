@@ -19,8 +19,8 @@ class ApiClient {
     if (dio == null) {
       dio = Dio();
       dio!.options.baseUrl = Constant.BASE_URL;
-      dio!.options.connectTimeout = 20000;
-      dio!.options.receiveTimeout = 30000;
+      dio!.options.connectTimeout = const Duration(seconds: 20);  // Updated
+      dio!.options.receiveTimeout = const Duration(seconds: 30);  // Updated
       dio!.options.contentType = Headers.formUrlEncodedContentType;
       dio!.interceptors
           .add(LogInterceptor(responseBody: false, requestBody: true));

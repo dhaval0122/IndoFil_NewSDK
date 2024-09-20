@@ -17,7 +17,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>Indofil QR</string>
+	<string>eAuthentica</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -36,19 +36,21 @@
 	<key>NSCameraUsageDescription</key>
 	<string>You can scan QR Codes using a camera and check product information.</string>
 	<key>NSLocalNetworkUsageDescription</key>
-	<string>Indofil QR requires access to the local network to acess internet</string>
+	<string>eAuthentica requires access to the local network to acess internet</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Indofil QR requires access to the location to enhance features and make sure products are available in your area</string>
+	<string>eAuthentica requires access to the location to enhance features and make sure products are available in your area</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Indofil QR requires access to the location to enhance features and make sure products are available in your area</string>
+	<string>eAuthentica requires access to the location to enhance features and make sure products are available in your area</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Indofil QR requires access to the location to enhance features and make sure products are available in your area</string>
+	<string>eAuthentica requires access to the location to enhance features and make sure products are available in your area</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>Indofil QR requires access to the micro phone</string>
+	<string>eAuthentica requires access to the micro phone</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Indofil QR requires access to the photo library.</string>
+	<string>eAuthentica requires access to the photo library.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Indofil QR requires access to the photo library.</string>
+	<string>eAuthentica requires access to the photo library.</string>
+	<key>UIApplicationSupportsIndirectInputEvents</key>
+	<true/>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>

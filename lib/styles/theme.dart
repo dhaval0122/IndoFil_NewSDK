@@ -3,8 +3,11 @@ import 'package:flutter/material.dart';
 ThemeData lightBlueTheme = ThemeData.light().copyWith(
   primaryColor: const Color(0xFF004a96),
   primaryColorDark: const Color(0xFF004a96),
-  accentColor: const Color(0xFFA6C0DA),
+  colorScheme: ThemeData.light().colorScheme.copyWith(
+    secondary: const Color(0xFFA6C0DA), // Replaces accentColor
+  ),
 );
+
 
 ThemeData greenTheme = ThemeData.light().copyWith(
 //  primaryColor: const Color(0xFF33932c),
@@ -13,7 +16,10 @@ ThemeData greenTheme = ThemeData.light().copyWith(
 //  primaryColor: const Color(0xFF33932c),
   primaryColor: const Color(0xFF65AC1E),
   primaryColorDark: const Color(0xFF4E9F74),
-  accentColor: const Color(0xFF65AC1E),
+  colorScheme: ThemeData.light().colorScheme.copyWith(
+    secondary: const Color(0xFF65AC1E), // Replaces accentColor
+  ),
+  // accentColor: const Color(0xFF65AC1E),
 
   //  primaryColorDark: const Color(0x80004a96),
 //  hintColor: Colors.white,
@@ -39,13 +45,19 @@ ThemeData greenTheme = ThemeData.light().copyWith(
 ThemeData yellowTheme = ThemeData.light().copyWith(
   primaryColor: const Color(0xFFf39500),
   primaryColorDark: const Color(0x80ba6700),
-  accentColor: const Color(0xFFffc646),
+  // accentColor: const Color(0xFFffc646),
+  colorScheme: ThemeData.light().colorScheme.copyWith(
+    secondary: const Color(0xFFffc646), // Replaces accentColor
+  ),
 );
 
 ThemeData orangeTheme = ThemeData.light().copyWith(
   primaryColor: const Color(0xffc60022),
   primaryColorDark: const Color(0x808d0000),
-  accentColor: const Color(0xffff4e4b),
+  // accentColor: const Color(0xffff4e4b),
+  colorScheme: ThemeData.light().colorScheme.copyWith(
+    secondary: const Color(0xffff4e4b), // Replaces accentColor
+  ),
 );
 
 //ThemeData blueTheme = ThemeData.light().copyWith(

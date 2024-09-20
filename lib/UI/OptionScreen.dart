@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'dart:convert';
+import 'dart:io';
 
 import 'package:ecp_sync_plugin/ecp_sync_plugin.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +12,7 @@ import 'package:flutter_basf_hk_app/Utils/CustomAppBar.dart';
 import 'package:flutter_basf_hk_app/Utils/Utils.dart';
 import 'package:flutter_basf_hk_app/blocs/OptionScreenBloc.dart';
 import 'package:flutter_basf_hk_app/components/CustomProgressBar.dart';
-import 'package:flutter_basf_hk_app/components/FadeBUAnimation.dart';
+// import 'package:flutter_basf_hk_app/components/FadeBUAnimation.dart';
 import 'package:flutter_basf_hk_app/components/LengthLimitingTextFieldFormatterFixed.dart';
 import 'package:flutter_basf_hk_app/localization/LocaleUtils.dart';
 import 'package:flutter_basf_hk_app/styles/colors.dart';
@@ -19,7 +21,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:lottie/lottie.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
-
+import 'package:http/http.dart' as http;
 import '../components/ButtonWidgets.dart';
 import '../webservices/Constant.dart';
 import 'ProductDetailScreen.dart';
@@ -56,264 +58,96 @@ class _OptionScreenState extends State<OptionScreen> {
           try {
             print('=======state=======${state.toString()}');
             if (state['type'] == '777') {
-              var detailsData = state['Details'];
-              print('====detailsData.toString()====${detailsData.toString()}');
-              var code = detailsData.toString().split('::');
-              print('====F CODE==length===${code.length}');
-              if (code.isNotEmpty) {
-
-                if (code[0].toString() == 'PS') {
-                  print('====PS===${code[1].toString()}');
-                  // pData = '';
-                  // optionScreenBloc.progressEvent(true);
-                  // setState(() {
-                  //   _loading = true;
-                  // });
-                  optionScreenBloc.setBusy(true);
-                } else if (code[0].toString() == 'PD') {
-                  print('====PD===${code[1].toString()}');
-                  // optionScreenBloc.progressEvent(false);
-
-                } else if (code[0].toString() == 'PResult') {
-                  // optionScreenBloc.progressEvent(false);
-                  // setState(() {
-                  //   _loading = false;
-                  // });
-                  // setState(() {
-                  //   _loading = false;
-                  // });
-                  optionScreenBloc.setBusy(false);
-                  print('====PResult===${code[1].toString()}');
-
-                  if (code[1].toString().toUpperCase() == 'PASS') {
-                    isValid = 'Y';
-
-                    // if (pData.isNotEmpty) {
-                    //   var stickerData = getStickerFromURL(pData);
-                    //
-                    //   print('====Data===$stickerData');
-                    //
-                    //   final CollectionReference stickersCollection =
-                    //   FirebaseFirestore.instance.collection('StickerData');
-                    //
-                    //   QuerySnapshot querySnapshot = await stickersCollection
-                    //       .get();
-                    //   List<Map<String, dynamic>> data = querySnapshot.docs
-                    //       .map((doc) => doc.data() as Map<String, dynamic>)
-                    //       .toList();
-                    //   print('======StickerData=length====${data.length}');
-                    //
-                    //   List<QRData> qrDataList =
-                    //   data.map((map) => QRData.fromMap(map)).toList();
-                    //   String batchNumberFromSecureQrCode = '';
-                    //   if (qrDataList.isNotEmpty) {
-                    //
-                    //     for (var qrData in qrDataList) {
-                    //       if(qrData.serialNoSecuredQR.trim() == 'BA813GLSO10HU7L3'){
-                    //         print('=========BA813GLSO10HU7L3=========');
-                    //       }
-                    //       if (qrData.serialNoSecuredQR.trim() == stickerData.trim()) {
-                    //         batchNumberFromSecureQrCode = qrData.serialNoNormalQR;
-                    //       }
-                    //     }
-                    //   } else {
-                    //     Utils.showToastMessage(
-                    //         'Please Upload Secure QR Codes', context);
-                    //   }
-                    //
-                    //   print('batchNumberFromSecureQrCode====$batchNumberFromSecureQrCode');
-                    //
-                    //   if (batchNumberFromSecureQrCode.isNotEmpty) {
-                    //     List<BatchInfo> batchListData = await fetchBatchInfo();
-                    //     List<STICKERDETAILS> batchStickerData = [];
-                    //     /*
-                    //    *
-                    //    * get All sticker from Batch Table
-                    //    *
-                    //    * */
-                    //     // print('==batchListData=====length===${batchListData.length}');
-                    //     if (batchListData.isNotEmpty) {
-                    //       for (int i = 0; i < batchListData.length; i++) {
-                    //         batchStickerData.addAll(batchListData[i].stickers);
-                    //       }
-                    //     }
-                    //
-                    //     List<String?> stickerCodes = batchStickerData
-                    //         .map((sticker) => sticker.vARSTICKER)
-                    //         .toList();
-                    //     // print('===stickerCodes====${stickerCodes.toString()}');
-                    //     bool exists =
-                    //     stickerCodes.contains(batchNumberFromSecureQrCode);
-                    //
-                    //     if (exists) {
-                    //       List<
-                    //           DispatchModel> dispatchedData = await fetchDispatch();
-                    //
-                    //       List<STICKERDETAILS> dispatchedStickerData = [];
-                    //       List<STICKERDETAILS> receiveStickerData = [];
-                    //
-                    //       /*
-                    //      *
-                    //      * get All sticker from Dispatch Table
-                    //      *
-                    //      * */
-                    //       // print('==batchListData==111===length===${dispatchedData.length}');
-                    //       if (dispatchedData.isNotEmpty) {
-                    //         for (int i = 0; i < dispatchedData.length; i++) {
-                    //           if (dispatchedData[i].isReceived == 'N') {
-                    //             dispatchedStickerData
-                    //                 .addAll(dispatchedData[i].stickers);
-                    //           } else {
-                    //             receiveStickerData.addAll(
-                    //                 dispatchedData[i].stickers);
-                    //           }
-                    //         }
-                    //       }
-                    //
-                    //       List<String?> stickerCodes1 = dispatchedStickerData
-                    //           .map((sticker) => sticker.vARSTICKER)
-                    //           .toList();
-                    //       print(
-                    //           '===stickerCodes1==11==${stickerCodes1
-                    //               .toString()}');
-                    //       print('===stickerNo==11==$batchNumberFromSecureQrCode');
-                    //       bool exists1 =
-                    //       stickerCodes1.contains(batchNumberFromSecureQrCode);
-                    //       print('===exists1==$exists1');
-                    //       if (!exists1) {
-                    //         /*
-                    //       *
-                    //       * Receive Data Get from Dispatch Table
-                    //       *
-                    //       * */
-                    //         List<String?> stickerCodes2 = receiveStickerData
-                    //             .map((sticker) => sticker.vARSTICKER)
-                    //             .toList();
-                    //         print(
-                    //             '===stickerCodes1==22==${stickerCodes2
-                    //                 .toString()}');
-                    //         print(
-                    //             '===stickerNo==22==$batchNumberFromSecureQrCode');
-                    //         bool exists2 =
-                    //         stickerCodes2.contains(batchNumberFromSecureQrCode);
-                    //
-                    //         if (exists2) {
-                    //           int index = stickerCodes.indexWhere((stickerCode) =>
-                    //           stickerCode == batchNumberFromSecureQrCode);
-                    //           STICKERDETAILS stickerdetailsModel =
-                    //           batchStickerData[index];
-                    //
-                    //           setState(() {
-                    //             _loading = false;
-                    //           });
-                    //           print(
-                    //               '===varBatchName==${stickerdetailsModel
-                    //                   .varBatchName}');
-                    //           print(
-                    //               '===varBatchMfg==${stickerdetailsModel
-                    //                   .varBatchMfg}');
-                    //           print(
-                    //               '===varBatchExp==${stickerdetailsModel
-                    //                   .varBatchExp}');
-                    //
-                    //           await Navigator.push(
-                    //             context,
-                    //             MaterialPageRoute(
-                    //                 builder: (context) =>
-                    //                     DeliveryBatchInfoScreen(
-                    //                       batchNo: stickerdetailsModel
-                    //                           .varBatchName,
-                    //                       mfgDate: stickerdetailsModel
-                    //                           .varBatchMfg,
-                    //                       expDate: stickerdetailsModel
-                    //                           .varBatchExp,
-                    //                     )),
-                    //           );
-                    //         } else {
-                    //           setState(() {
-                    //             _loading = false;
-                    //           });
-                    //           Utils.showToastMessage(
-                    //               'Sticker does not find in receive table.',
-                    //               context);
-                    //         }
-                    //       } else {
-                    //         setState(() {
-                    //           _loading = false;
-                    //         });
-                    //         Utils.showToastMessage(
-                    //             'Sticker have not received yet.', context);
-                    //       }
-                    //     } else {
-                    //       setState(() {
-                    //         _loading = false;
-                    //       });
-                    //       Utils.showToastMessage(
-                    //           'Sticker does not map with batch.', context);
-                    //     }
-                    //   } else {
-                    //     setState(() {
-                    //       _loading = false;
-                    //     });
-                    //     Utils.showToastMessage(
-                    //         'Normal QR Code is missing.', context);
-                    //   }
-                    //
-                    // } else {
-                    //   setState(() {
-                    //     _loading = false;
-                    //   });
-                    //   Utils.showToastMessage(
-                    //       'Please Scan QR Code Again', context);
-                    // }
-                    navigateToAuthenticScreen('https://va1.ecubix.com:4447/GenuineView');
-                  } else if (code[1].toString().toUpperCase() == 'FAIL') {
-                    isValid = 'N';
-                    navigateToAuthenticScreen('https://va1.ecubix.com:4447/FakeView');
-                    // await Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //       builder: (context) =>
-                    //           DeliveryBatchInfoScreen(
-                    //             batchNo: '',
-                    //             mfgDate: '',
-                    //             expDate: '',
-                    //           )),
-                    // );
-                  } else {
-                    // isValid = '';
-                    // showReceiveDialog();
-                    // Utils.showToastMessage(code[1].toString(), mContext!);
-                    Utils.showToastMessage(code[1].toString());
-                  }
-
-                } else if (code[0].toString() == 'PData') {
-                  // optionScreenBloc.progressEvent(false);
-
-                  // Utils.showToastMessage(code[1].toString());
-                  print('====PData===${code[1].toString()}');
-                  print('====PData===$isValid');
-                  // pData = code[1].toString();
-
-                } else {
-                  // setState(() {
-                  //   _loading = false;
-                  // });
-                  optionScreenBloc.setBusy(false);
-                  print('====Else===${code[1].toString()}');
-                }
-              }
+              // optionScreenBloc.setBusy(true);
             } else if (state['type'] == '888') {
-
-              // setState(() {
-              //   _loading = false;
-              // });
               optionScreenBloc.setBusy(false);
-
               print('==========8888888888888========');
+            } else if (state['type'] == '999') {
+              optionScreenBloc.setBusy(false);
+              var data = state['Details'].toString();
+              print('==========data========$data');
               // if(!isShowDialog) {
-              await showReceiveDialog();
+              // await showReceiveDialog();
               // }
+
+              try {
+                // String jsonString = '{"extendedData": "{\"ver\":\"SecureQR v2.0.95\",\"text\":\"http://c3.ivcs.ai/21/G4H1A0GJDGUZYKOA\",\"externalText\":\"\",\"resultCode\":33,\"extendedCode\":6,\"format\":\"11\",\"externalFormat\":\"\",\"certified\":false,\"re\":1,\"flash\":true,\"focus\":false,\"lens\":-1.000000,\"da\":\"3004850636362\",\"fd\":\"300575761\",\"t1\":72.000000,\"cea\":\"\",\"tm\":\"b=motorola,m=motorola one power,o=29,ev=tv,ce=n0,pos=t,-8.0-8.00,-8.0-8.00,cur=n-1,bind=n,ssv=n,re=2012333333,tvp=72,0,0,0,0,2080,0,3,0,300,72,72,1,1,22,1,24,1,70,40,,ep=n,ssp=n\",\"bind\":false,\"bind_type\":\"\",\"bind_label\":\"\",\"bind_value\":\"\",\"bind_detected\":false,\"bind_detected_value\":\"\",\"off\":{\"db\":{\"co\":0,\"st\":\"7\"},\"ne\":{\"co\":1001,\"st\":\"0\"}}}"}';
+
+                // Decode JSON
+                if(data.isNotEmpty) {
+                  Map<String, dynamic> jsonMap = jsonDecode(data.toString());
+
+                  // Convert extendedData to Dart Map
+                  Map<String, dynamic> extendedData = jsonDecode(
+                      jsonMap['extendedData']);
+
+                  // Create an instance of SecureQRData from the JSON
+                  SecureQRData secureQRData = SecureQRData.fromJson(
+                      extendedData);
+
+                  print('====text=====${secureQRData.text}');
+                  print('====resultCode=====${secureQRData.resultCode}');
+                  // print('====resultCode=====$resultCode');
+
+                  await performScanOwn(
+                      data, secureQRData.text,
+                      secureQRData.resultCode.toString());
+                } else {
+                  optionScreenBloc.setBusy(false);
+                  await showReceiveDialog();
+                }
+              }catch(e){
+                print('==========data========${e.toString()}');
+                optionScreenBloc.setBusy(false);
+                await showReceiveDialog();
+              }
+
+            } else if (state['type'] == '211') {
+              // var data = state['Details'];
+              // Utils.showToastMessage(data.toString());
+              optionScreenBloc.setBusy(true);
+            } else if (state['type'] == '311') {
+              var data = state['Details'];
+              optionScreenBloc.setBusy(false);
+              // Utils.showToastMessage(data.toString());
+            } else if (state['type'] == '411') {
+              optionScreenBloc.setBusy(false);
+              var data = state['Details'].toString();
+              // Utils.showToastMessage(data.toString());
+              if(data.isNotEmpty){
+
+                // Step 1: Parse the JSON string into a Map
+                Map<String, dynamic> jsonData = jsonDecode(data);
+
+                // Step 2: Convert the Map to the ScanData model using fromJson
+                var scanData = ScanData.fromJson(jsonData);
+
+                // Now you can access the data in the scanData object
+                print('===scanResult====${scanData.scanResult}');   // Output: result_value
+                print('===scanMessage====${scanData.scanMessage}');   // Output: result_value
+                print('===scanTextData====${scanData.scanTextData}');   // Output: result_value
+                // print(scanData.scanMessage);  // Output: message_value
+                // print(scanData.scanTextData); // Output: text_data_value
+                // Utils.showToastMessage(scanData.scanResult!);
+
+                // Utils.showToastMessage(scanData.scanTextData!);
+
+                await performScanOwn(data,scanData.scanTextData.toString(),scanData.scanResult.toString());
+
+                // if(scanData.scanResult == '0'){
+                //   isValid = 'Y';
+                //   navigateToAuthenticScreen('https://va1.ecubix.com/web/genuine.php');
+                // } else if(scanData.scanResult == '1'){
+                //   isValid = 'N';
+                //   navigateToAuthenticScreen('https://va1.ecubix.com/web/fake.php');
+                // } else {
+                //   // Utils.showToastMessage(scanData.scanMessage!);
+                //   optionScreenBloc.setBusy(false);
+                //   // await showReceiveDialog();
+                // }
+
+              }
+
             }
           } catch (e) {
             print('====Catch=======${e.toString()}');
@@ -432,6 +266,78 @@ class _OptionScreenState extends State<OptionScreen> {
     });
   }
 
+  Future<void> performScanOwn(String scanData,String result, String resultCode) async {
+
+    try {
+      // Define API URL pointing to scan.php
+      var url = 'https://hpcldemotesting.ecubix.com:4452/api/scan.php';
+      print('URL: $url');
+
+      // Prepare the API request body with proper fields
+      Map<String, dynamic> body = {
+        'device_name': Platform.isIOS ? 'iPhone' : 'Android', // Replace with actual device name or fetch programmatically
+        'device_type': Platform.isIOS ? 'IOS' : 'Android', // Replace with actual device type
+        'imei': await Utils.getDeviceID(), // Replace with actual IMEI number
+        'location_lat': '0', // Replace with actual latitude
+        'location_lng': '0', // Replace with actual longitude
+        'scancode': scanData,
+        'result_value': result,
+        'result_code': resultCode,
+        'user_id': Platform.isIOS ? '-1' : '1', // Replace with actual user ID
+      };
+
+      // Define headers
+      var headers = <String, String>{
+        'Content-Type': 'application/x-www-form-urlencoded', // Form-urlencoded as expected by PHP
+        'X-ApiKey': 'i3BalYxQL' // Replace with actual API key if needed
+      };
+
+      print('===body====${body.toString()}');
+
+      // API Call using http with form-urlencoded body
+      final response = await http.post(
+        Uri.parse(url),
+        body: body, // No need to jsonEncode for form-urlencoded
+        headers: headers,
+      ).timeout(Duration(minutes: 6));
+      // print('===response====${response.toString()}');
+      // Handle the response
+
+      if (response.statusCode == 200) {
+        final responseBody = jsonDecode(response.body);
+        print('===responseBody====${responseBody.toString()}');
+        // Safely access fields with null-checks and provide default values
+        bool status = responseBody['status'] ?? false;
+        String message = responseBody['message'] ?? 'No message provided';
+        String responseCode = responseBody['response_code'] ?? '-1';
+
+        if (status) {
+          String responseResult = '';
+          if (responseCode == '0') {
+            responseResult = "Pass";
+            navigateToAuthenticScreen('https://va1.ecubix.com/web/genuine.php');
+          } else if (responseCode == '1') {
+            responseResult = "Fail";
+            navigateToAuthenticScreen('https://va1.ecubix.com/web/fake.php');
+          } else if (responseCode == '-1') {
+            responseResult = "Retry";
+            optionScreenBloc.setBusy(false);
+            await showReceiveDialog();
+          }
+          print("responseResult: $responseResult");
+          print("responseCode: $responseCode");
+        } else {
+          print('Status is false: $message');
+        }
+      } else {
+        print('Error: ${response.statusCode} ${response.reasonPhrase}');
+      }
+
+    } catch (e) {
+      print('Error: ${e.toString()}');
+    }
+  }
+
   showReceiveDialog() async {
     // isShowDialog = true;
     await showDialog(
@@ -519,7 +425,11 @@ class _OptionScreenState extends State<OptionScreen> {
 
                               isValid = '';
                               // pData = '';
-                              await _battery.scanQRCodeViaSDK();
+                              if(Platform.isIOS) {
+                                await _battery.scanSecureQRCodeIOS();
+                              } else {
+                                await _battery.scanQRCodeViaSDK();
+                              }
                             } else {
                               Utils.showToastMessage(
                                   LocaleUtils.getString(
@@ -636,8 +546,7 @@ class _OptionScreenState extends State<OptionScreen> {
                                                   child: Container(
                                                     child: Column(
                                                       children: [
-                                                        FadeBUAnimation(
-                                                            1,
+
                                                             Container(
                                                               height: 50,
                                                               padding:
@@ -666,9 +575,8 @@ class _OptionScreenState extends State<OptionScreen> {
                                                                   )),
                                                                 ],
                                                               ),
-                                                            )),
-                                                        FadeBUAnimation(
-                                                          1.5,
+                                                            ),
+
                                                           Align(
                                                             alignment:
                                                                 Alignment.center,
@@ -811,15 +719,14 @@ class _OptionScreenState extends State<OptionScreen> {
                                                               ),
                                                             ),
                                                           ),
-                                                        ),
+
                                                       ],
                                                     ),
                                                   ),
                                                 ),
                                                 Visibility(
                                                   visible: false,
-                                                  child: FadeBUAnimation(
-                                                      2,
+                                                  child:
                                                       Container(
                                                         margin: EdgeInsets.only(
                                                             top: 30, bottom: 30),
@@ -835,10 +742,9 @@ class _OptionScreenState extends State<OptionScreen> {
                                                               color:
                                                                   Colors.black),
                                                         ),
-                                                      )),
+                                                      ),
                                                 ),
-                                                FadeBUAnimation(
-                                                    2.5,
+
                                                     InkWell(
                                                       onTap: () async {
                                                         // await Navigator.of(
@@ -847,63 +753,68 @@ class _OptionScreenState extends State<OptionScreen> {
                                                         //     builder: (context) =>
                                                         //         WebViewScreen('http://c3.ivcs.ai/21/AAPPPAKD0UOOC9RX/10/QRTEST?11=231018&17=300101&MOB=9033486861&LAT=23.051017&LONG=72.4898316&DVC=0f562546c8c7a946&FRM=D&LNG=1&IsValid=Y')));
 
-                                                        var isSDKScan =
-                                                            await sharedPrefs
-                                                                .getString(
-                                                                    PREF_IS_SDK_SCAN_ENABLE);
-                                                        if (isSDKScan == 'Y') {
+                                                        // var isSDKScan =
+                                                        //     await sharedPrefs
+                                                        //         .getString(
+                                                        //             PREF_IS_SDK_SCAN_ENABLE);
+                                                        // if (isSDKScan == 'Y') {
                                                           isValid = '';
-                                                          await _battery
-                                                              .scanQRCodeViaSDK();
-                                                        } else {
-                                                          if (widget
-                                                              .mNo.isNotEmpty) {
-                                                            if (widget.mNo
-                                                                    .length ==
-                                                                10) {
-                                                              if (await Geolocator
-                                                                  .isLocationServiceEnabled()) {
-                                                                if (await Utils
-                                                                    .checkInternetConnection()) {
-                                                                  if (await checkPermissionData()) {
-                                                                    try {
-                                                                      // await getUserLocation();
-                                                                    } catch (e) {
-                                                                      print(e
-                                                                          .toString());
-                                                                    }
-
-                                                                    await Navigator.of(context).push(MaterialPageRoute(
-                                                                        builder: (context) => ScanScreen(
-                                                                            widget.name,
-                                                                            widget.mNo)));
-                                                                  } else {
-                                                                    var status =
-                                                                        await getCameraPermission();
-                                                                    if (status ==
-                                                                        PermissionStatus
-                                                                            .permanentlyDenied) {
-                                                                      await openAppSettings();
-                                                                    } else {
-                                                                      var status =
-                                                                          await getCameraPermission();
-                                                                      if (status ==
-                                                                          PermissionStatus
-                                                                              .permanentlyDenied) {
-                                                                        await openAppSettings();
-                                                                      }
-                                                                    }
-                                                                  }
-                                                                } else {
-                                                                  Utils.showToastMessage(
-                                                                      LocaleUtils.getString(
-                                                                          mContext,
-                                                                          'no_internet_connection'));
-                                                                }
-                                                              }
-                                                            }
+                                                          // await _battery
+                                                          //     .scanSecureQRCodeIOS();
+                                                          if(Platform.isIOS) {
+                                                            await _battery.scanSecureQRCodeIOS();
+                                                          } else {
+                                                            await _battery.scanQRCodeViaSDK();
                                                           }
-                                                        }
+                                                        // } else {
+                                                        //   if (widget
+                                                        //       .mNo.isNotEmpty) {
+                                                        //     if (widget.mNo
+                                                        //             .length ==
+                                                        //         10) {
+                                                        //       if (await Geolocator
+                                                        //           .isLocationServiceEnabled()) {
+                                                        //         if (await Utils
+                                                        //             .checkInternetConnection()) {
+                                                        //           if (await checkPermissionData()) {
+                                                        //             try {
+                                                        //               // await getUserLocation();
+                                                        //             } catch (e) {
+                                                        //               print(e
+                                                        //                   .toString());
+                                                        //             }
+                                                        //
+                                                        //             await Navigator.of(context).push(MaterialPageRoute(
+                                                        //                 builder: (context) => ScanScreen(
+                                                        //                     widget.name,
+                                                        //                     widget.mNo)));
+                                                        //           } else {
+                                                        //             var status =
+                                                        //                 await getCameraPermission();
+                                                        //             if (status ==
+                                                        //                 PermissionStatus
+                                                        //                     .permanentlyDenied) {
+                                                        //               await openAppSettings();
+                                                        //             } else {
+                                                        //               var status =
+                                                        //                   await getCameraPermission();
+                                                        //               if (status ==
+                                                        //                   PermissionStatus
+                                                        //                       .permanentlyDenied) {
+                                                        //                 await openAppSettings();
+                                                        //               }
+                                                        //             }
+                                                        //           }
+                                                        //         } else {
+                                                        //           Utils.showToastMessage(
+                                                        //               LocaleUtils.getString(
+                                                        //                   mContext,
+                                                        //                   'no_internet_connection'));
+                                                        //         }
+                                                        //       }
+                                                        //     }
+                                                        //   }
+                                                        // }
                                                       },
                                                       child: Container(
                                                         margin:
@@ -963,7 +874,7 @@ class _OptionScreenState extends State<OptionScreen> {
                                                           ],
                                                         ),
                                                       ),
-                                                    )),
+                                                    ),
                                               ],
                                             ),
                                           ),
@@ -1217,4 +1128,166 @@ class _OptionScreenState extends State<OptionScreen> {
     return status;
   }
 }
+
+class ScanData {
+  String? scanResult;
+  String? scanMessage;
+  String? scanTextData;
+
+  ScanData({this.scanResult, this.scanMessage, this.scanTextData});
+
+  // Factory method to create an instance from a JSON map
+  factory ScanData.fromJson(Map<String, dynamic> json) {
+    return ScanData(
+      scanResult: json['scanResult'],
+      scanMessage: json['scanMessage'],
+      scanTextData: json['scanTextData'],
+    );
+  }
+
+  // Method to convert an instance to a JSON map
+  Map<String, dynamic> toJson() {
+    return {
+      'scanResult': scanResult,
+      'scanMessage': scanMessage,
+      'scanTextData': scanTextData,
+    };
+  }
+}
+
+class SecureQRData {
+  final String ver;
+  final String text;
+  final String externalText;
+  final int resultCode;
+  final int extendedCode;
+  final String format;
+  final String externalFormat;
+  final bool certified;
+  final int re;
+  final bool flash;
+  final bool focus;
+  final double lens;
+  final String da;
+  final String fd;
+  final double t1;
+  final String cea;
+  final String tm;
+  final bool bind;
+  final String bindType;
+  final String bindLabel;
+  final String bindValue;
+  final bool bindDetected;
+  final String bindDetectedValue;
+  final Off off;
+
+  SecureQRData({
+    required this.ver,
+    required this.text,
+    required this.externalText,
+    required this.resultCode,
+    required this.extendedCode,
+    required this.format,
+    required this.externalFormat,
+    required this.certified,
+    required this.re,
+    required this.flash,
+    required this.focus,
+    required this.lens,
+    required this.da,
+    required this.fd,
+    required this.t1,
+    required this.cea,
+    required this.tm,
+    required this.bind,
+    required this.bindType,
+    required this.bindLabel,
+    required this.bindValue,
+    required this.bindDetected,
+    required this.bindDetectedValue,
+    required this.off,
+  });
+
+  factory SecureQRData.fromJson(Map<String, dynamic> json) {
+    return SecureQRData(
+      ver: json['ver'],
+      text: json['text'],
+      externalText: json['externalText'],
+      resultCode: json['resultCode'],
+      extendedCode: json['extendedCode'],
+      format: json['format'],
+      externalFormat: json['externalFormat'],
+      certified: json['certified'],
+      re: json['re'],
+      flash: json['flash'],
+      focus: json['focus'],
+      lens: json['lens'].toDouble(),
+      da: json['da'],
+      fd: json['fd'],
+      t1: json['t1'].toDouble(),
+      cea: json['cea'],
+      tm: json['tm'],
+      bind: json['bind'],
+      bindType: json['bind_type'],
+      bindLabel: json['bind_label'],
+      bindValue: json['bind_value'],
+      bindDetected: json['bind_detected'],
+      bindDetectedValue: json['bind_detected_value'],
+      off: Off.fromJson(json['off']),
+    );
+  }
+}
+
+class Off {
+  final Db db;
+  final Ne ne;
+
+  Off({
+    required this.db,
+    required this.ne,
+  });
+
+  factory Off.fromJson(Map<String, dynamic> json) {
+    return Off(
+      db: Db.fromJson(json['db']),
+      ne: Ne.fromJson(json['ne']),
+    );
+  }
+}
+
+class Db {
+  final int co;
+  final String st;
+
+  Db({
+    required this.co,
+    required this.st,
+  });
+
+  factory Db.fromJson(Map<String, dynamic> json) {
+    return Db(
+      co: json['co'],
+      st: json['st'],
+    );
+  }
+}
+
+class Ne {
+  final int co;
+  final String st;
+
+  Ne({
+    required this.co,
+    required this.st,
+  });
+
+  factory Ne.fromJson(Map<String, dynamic> json) {
+    return Ne(
+      co: json['co'],
+      st: json['st'],
+    );
+  }
+}
+
+
 
